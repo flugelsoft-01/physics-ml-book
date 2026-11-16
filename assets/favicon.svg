@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e40af" />
+      <stop offset="50%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Outer Rounded Square Background -->
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="#0f172a" />
+  
+  <!-- First Elliptical Orbital Ring -->
+  <ellipse cx="32" cy="32" rx="22" ry="8" fill="none" stroke="url(#grad1)" stroke-width="2.5" transform="rotate(30 32 32)" stroke-dasharray="80 10" />
+  
+  <!-- Second Elliptical Orbital Ring -->
+  <ellipse cx="32" cy="32" rx="22" ry="8" fill="none" stroke="url(#grad1)" stroke-width="2.5" transform="rotate(-30 32 32)" stroke-dasharray="80 10" />
+
+  <!-- Third Horizontal Ring -->
+  <ellipse cx="32" cy="32" rx="22" ry="8" fill="none" stroke="url(#grad2)" stroke-width="2.2" transform="rotate(90 32 32)" />
+
+  <!-- Central Physics-ML Nucleus Node -->
+  <circle cx="32" cy="32" r="6" fill="url(#grad2)" />
+
+  <!-- Satellite Electron / Neural Weight Nodes -->
+  <circle cx="48" cy="22" r="3" fill="#38bdf8" />
+  <circle cx="16" cy="42" r="3" fill="#38bdf8" />
+  <circle cx="32" cy="10" r="2.5" fill="#34d399" />
+  <circle cx="32" cy="54" r="2.5" fill="#34d399" />
+
+  <!-- Connecting Quantum Neural Lines -->
+  <line x1="32" y1="32" x2="48" y2="22" stroke="rgba(56, 189, 248, 0.4)" stroke-width="1.2" />
+  <line x1="32" y1="32" x2="16" y2="42" stroke="rgba(56, 189, 248, 0.4)" stroke-width="1.2" />
+</svg>

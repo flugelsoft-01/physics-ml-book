@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ chapter.title }} | Data Science & Machine Learning for Physics</title>
+
+  <!-- Favicon & App Icons -->
+  <link rel="icon" type="image/svg+xml" href="{{ base_path }}assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ base_path }}assets/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="{{ base_path }}assets/apple-touch-icon.png">
+  <link rel="manifest" href="{{ base_path }}assets/site.webmanifest">
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- Primary SEO Meta Tags -->
+  <meta name="title" content="{{ chapter.title }} | Data Science & Machine Learning for Physics">
+  <meta name="description" content="{{ chapter.subtitle }} - Capstone Project in {{ chapter.part_name }} covering governing physical equations, synthetic solvers, and PINN architectures.">
+  <meta name="keywords" content="{{ chapter.keywords | join(', ') }}, Physics-Informed Neural Networks, PINN, Scientific Machine Learning, SciML, Differential Equations">
+  <meta name="author" content="Data Science & ML for Physics Authors">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://physics-ml-book.org/chapters/{{ chapter.slug }}.html">
+
+  <!-- GEO & Regional Metadata -->
+  <meta name="geo.region" content="US-CA">
+  <meta name="geo.placename" content="San Francisco, California">
+  <meta name="geo.position" content="37.7749;-122.4194">
+  <meta name="ICBM" content="37.7749, -122.4194">
+  <meta name="DC.title" content="{{ chapter.title }}">
+  <meta name="DC.subject" content="Physics-Informed Machine Learning, Computational Engineering">
+  <meta name="DC.coverage" content="World">
+
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Data Science & Machine Learning for Physics: 30 Capstone Projects Across Industries">
+  <meta property="og:title" content="{{ chapter.title }}">
+  <meta property="og:description" content="{{ chapter.subtitle }}">
+  <meta property="og:url" content="https://physics-ml-book.org/chapters/{{ chapter.slug }}.html">
+  <meta property="og:image" content="https://physics-ml-book.org/assets/apple-touch-icon.png">
+  <meta property="og:image:alt" content="Physics-ML Icon">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="en_GB">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ chapter.title }}">
+  <meta name="twitter:description" content="{{ chapter.subtitle }}">
+  <meta name="twitter:image" content="https://physics-ml-book.org/assets/apple-touch-icon.png">
+
+  <!-- JSON-LD Structured Data Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "{{ chapter.title }}",
+    "description": "{{ chapter.subtitle }}",
+    "articleSection": "{{ chapter.part_name }}",
+    "keywords": "{{ chapter.keywords | join(', ') }}",
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "isPartOf": {
+      "@type": "Book",
+      "name": "Data Science & Machine Learning for Physics: 30 Capstone Projects Across Industries",
+      "url": "https://physics-ml-book.org"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Physics-ML Technical Monograph Publishing"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="{{ base_path }}assets/style.css">
+  
+  <!-- KaTeX for ultra-fast LaTeX math rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ],
+      throwOnError: false
+    });"></script>
+
+  <!-- Plotly.js for interactive physics diagnostics -->
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+</head>
+<body data-basepath="{{ base_path }}">
+
+  <!-- Mobile Top Navigation Bar -->
+  <div class="mobile-topbar">
+    <button class="mobile-menu-btn" aria-label="Toggle Navigation">☰</button>
+    <a href="{{ base_path }}index.html" class="book-title-badge">
+      <span class="book-icon">⚛</span>
+      <span class="book-title-text">Physics-ML Book</span>
+    </a>
+    <button class="search-box-btn trigger-search-btn" style="width: auto; padding: 6px 10px;">🔍</button>
+  </div>
+
+  <div class="app-wrapper">
+    <!-- 1. Left Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="{{ base_path }}index.html" class="book-title-badge">
+          <div class="book-icon">⚛</div>
+          <div class="book-title-text">DS & ML for Physics<br><small style="font-weight: 400; color: var(--text-muted); font-size: 0.75rem;">30 Capstone Projects</small></div>
+        </a>
+        <button class="search-box-btn trigger-search-btn">
+          <span>🔍 Quick search...</span>
+          <span class="search-shortcut">/</span>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        {% if supplementary %}
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Foundations & Reference</span>
+            <span class="toc-badge">Guides</span>
+          </div>
+          {% for sp in supplementary %}
+          <a href="{{ base_path }}chapters/{{ sp.slug }}.html" class="toc-item {% if sp.slug == chapter.slug %}active{% endif %}">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">{{ sp.short_title }}</span>
+          </a>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        {% for part in curriculum %}
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>{{ part.name }}</span>
+            <span class="toc-badge">{{ part.badge }}</span>
+          </div>
+          {% for ch in part.chapters %}
+          <a href="{{ base_path }}chapters/{{ ch.slug }}.html" class="toc-item {% if ch.slug == chapter.slug %}active{% endif %}">
+            <span class="toc-badge">{{ ch.number_str }}</span>
+            <span style="flex:1;">{{ ch.short_title }}</span>
+          </a>
+          {% endfor %}
+        </div>
+        {% endfor %}
+      </nav>
+
+      <div class="sidebar-footer">
+        <span>v1.0 &bull; 2026 Edition</span>
+        <button class="theme-toggle-btn" aria-label="Toggle dark/light mode">
+          <span class="theme-mode-text">☀️ Light</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- 2. Main Content Center Pane -->
+    <main class="main-wrapper">
+      <article class="content-container">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+          <a href="{{ base_path }}index.html">Home</a>
+          <span>&rsaquo;</span>
+          <span>{{ chapter.part_name }}</span>
+          <span>&rsaquo;</span>
+          <span style="color: var(--text-primary); font-weight: 500;">
+            {% if chapter.part_name == 'Foundations & Reference' %}{{ chapter.short_title }}{% else %}Project {{ chapter.number_str }}{% endif %}
+          </span>
+        </div>
+
+        <!-- Chapter Header Badge -->
+        <div class="chapter-meta-badge">
+          <span>🏷️ {{ chapter.industry }}</span>
+          <span>&bull;</span>
+          <span>⚙️ {{ chapter.difficulty }}</span>
+          <span>&bull;</span>
+          <span>⏱️ {{ chapter.reading_time }} min read</span>
+        </div>
+
+        <h1>{{ chapter.title }}</h1>
+        <div class="chapter-subtitle">{{ chapter.subtitle }}</div>
+
+        <!-- Rendered Chapter Body -->
+        <div class="chapter-body">
+          {{ chapter.content_html | safe }}
+        </div>
+
+        <!-- Bottom Chapter Pagination -->
+        <div class="chapter-nav-cards">
+          {% if prev_chapter %}
+          <a href="{{ base_path }}chapters/{{ prev_chapter.slug }}.html" class="chapter-nav-card prev">
+            <span class="chapter-nav-label">&larr; Previous Capstone</span>
+            <span class="chapter-nav-title">{{ prev_chapter.number_str }}: {{ prev_chapter.short_title }}</span>
+          </a>
+          {% endif %}
+
+          {% if next_chapter %}
+          <a href="{{ base_path }}chapters/{{ next_chapter.slug }}.html" class="chapter-nav-card next">
+            <span class="chapter-nav-label">Next Capstone &rarr;</span>
+            <span class="chapter-nav-title">{{ next_chapter.number_str }}: {{ next_chapter.short_title }}</span>
+          </a>
+          {% endif %}
+        </div>
+      </article>
+
+      <!-- 3. Right Sidebar ("On This Page" Section Anchor Tracker) -->
+      <aside class="right-toc">
+        <div class="right-toc-title">On This Page</div>
+        <ul class="right-toc-links">
+          <li><a href="#1-the-physical-principle" class="right-toc-link">1. Physical Principle</a></li>
+          <li><a href="#2-industrial-context-roi" class="right-toc-link">2. Industrial ROI</a></li>
+          <li><a href="#3-data-acquisition-synthetic-physics-solver" class="right-toc-link">3. Synthetic Solver</a></li>
+          <li><a href="#4-data-science-physics-ml-workflow" class="right-toc-link">4. Physics-ML Workflow</a></li>
+          <li><a href="#5-interactive-visualization-diagnostics" class="right-toc-link">5. Diagnostics & Viz</a></li>
+          <li><a href="#6-production-deployment-notes" class="right-toc-link">6. Deployment Notes</a></li>
+        </ul>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Search Modal Backdrop & Dialog -->
+  <div class="search-modal-backdrop" id="search-modal-backdrop">
+    <div class="search-modal">
+      <div class="search-modal-header">
+        <span style="font-size: 1.1rem; color: var(--text-muted);">🔍</span>
+        <input type="text" class="search-modal-input" id="search-modal-input" placeholder="Search physics equations, models, or industries..." autocomplete="off">
+        <button style="background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--text-muted);" onclick="document.getElementById('search-modal-backdrop').classList.remove('open')">&times;</button>
+      </div>
+      <div class="search-modal-results" id="search-modal-results"></div>
+    </div>
+  </div>
+
+  <script src="{{ base_path }}assets/main.js"></script>
+  <script src="{{ base_path }}assets/search.js"></script>
+</body>
+</html>

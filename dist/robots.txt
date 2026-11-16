@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://physics-ml-book.org/sitemap.xml

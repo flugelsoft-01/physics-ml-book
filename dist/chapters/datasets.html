@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sensor Telemetry & Open Physical Benchmark Datasets | Data Science & Machine Learning for Physics</title>
+
+  <!-- Favicon & App Icons -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../assets/site.webmanifest">
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- Primary SEO Meta Tags -->
+  <meta name="title" content="Sensor Telemetry & Open Physical Benchmark Datasets | Data Science & Machine Learning for Physics">
+  <meta name="description" content="Verified Catalog of NOAA, NREL, NASA, USGS, and fastMRI Telemetry Repositories - Capstone Project in Foundations & Reference covering governing physical equations, synthetic solvers, and PINN architectures.">
+  <meta name="keywords" content="NREL, NASA C-MAPSS, fastMRI, USGS Seismic, Copernicus CMEMS, LOBSTER, Physics-Informed Neural Networks, PINN, Scientific Machine Learning, SciML, Differential Equations">
+  <meta name="author" content="Data Science & ML for Physics Authors">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://physics-ml-book.org/chapters/datasets.html">
+
+  <!-- GEO & Regional Metadata -->
+  <meta name="geo.region" content="US-CA">
+  <meta name="geo.placename" content="San Francisco, California">
+  <meta name="geo.position" content="37.7749;-122.4194">
+  <meta name="ICBM" content="37.7749, -122.4194">
+  <meta name="DC.title" content="Sensor Telemetry & Open Physical Benchmark Datasets">
+  <meta name="DC.subject" content="Physics-Informed Machine Learning, Computational Engineering">
+  <meta name="DC.coverage" content="World">
+
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Data Science & Machine Learning for Physics: 30 Capstone Projects Across Industries">
+  <meta property="og:title" content="Sensor Telemetry & Open Physical Benchmark Datasets">
+  <meta property="og:description" content="Verified Catalog of NOAA, NREL, NASA, USGS, and fastMRI Telemetry Repositories">
+  <meta property="og:url" content="https://physics-ml-book.org/chapters/datasets.html">
+  <meta property="og:image" content="https://physics-ml-book.org/assets/apple-touch-icon.png">
+  <meta property="og:image:alt" content="Physics-ML Icon">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="en_GB">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sensor Telemetry & Open Physical Benchmark Datasets">
+  <meta name="twitter:description" content="Verified Catalog of NOAA, NREL, NASA, USGS, and fastMRI Telemetry Repositories">
+  <meta name="twitter:image" content="https://physics-ml-book.org/assets/apple-touch-icon.png">
+
+  <!-- JSON-LD Structured Data Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Sensor Telemetry & Open Physical Benchmark Datasets",
+    "description": "Verified Catalog of NOAA, NREL, NASA, USGS, and fastMRI Telemetry Repositories",
+    "articleSection": "Foundations & Reference",
+    "keywords": "NREL, NASA C-MAPSS, fastMRI, USGS Seismic, Copernicus CMEMS, LOBSTER",
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "isPartOf": {
+      "@type": "Book",
+      "name": "Data Science & Machine Learning for Physics: 30 Capstone Projects Across Industries",
+      "url": "https://physics-ml-book.org"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Physics-ML Technical Monograph Publishing"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="../assets/style.css">
+  
+  <!-- KaTeX for ultra-fast LaTeX math rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ],
+      throwOnError: false
+    });"></script>
+
+  <!-- Plotly.js for interactive physics diagnostics -->
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+</head>
+<body data-basepath="../">
+
+  <!-- Mobile Top Navigation Bar -->
+  <div class="mobile-topbar">
+    <button class="mobile-menu-btn" aria-label="Toggle Navigation">☰</button>
+    <a href="../index.html" class="book-title-badge">
+      <span class="book-icon">⚛</span>
+      <span class="book-title-text">Physics-ML Book</span>
+    </a>
+    <button class="search-box-btn trigger-search-btn" style="width: auto; padding: 6px 10px;">🔍</button>
+  </div>
+
+  <div class="app-wrapper">
+    <!-- 1. Left Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="book-title-badge">
+          <div class="book-icon">⚛</div>
+          <div class="book-title-text">DS & ML for Physics<br><small style="font-weight: 400; color: var(--text-muted); font-size: 0.75rem;">30 Capstone Projects</small></div>
+        </a>
+        <button class="search-box-btn trigger-search-btn">
+          <span>🔍 Quick search...</span>
+          <span class="search-shortcut">/</span>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Foundations & Reference</span>
+            <span class="toc-badge">Guides</span>
+          </div>
+          
+          <a href="../chapters/foundations.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Paradigms of Physics-ML</span>
+          </a>
+          
+          <a href="../chapters/notation.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Notation & Dimensionless Numbers</span>
+          </a>
+          
+          <a href="../chapters/benchmarks.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Industrial ROI Benchmarks</span>
+          </a>
+          
+          <a href="../chapters/datasets.html" class="toc-item active">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Open Datasets Catalog</span>
+          </a>
+          
+          <a href="../chapters/glossary.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Physics-ML Glossary</span>
+          </a>
+          
+          <a href="../chapters/playground.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Live Interactive Sandbox</span>
+          </a>
+          
+        </div>
+        
+
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 1: Energy & Power Systems</span>
+            <span class="toc-badge">Projects 01–06</span>
+          </div>
+          
+          <a href="../chapters/01_wind_wake.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Wind Turbine Wake Modeling</span>
+          </a>
+          
+          <a href="../chapters/02_smart_grid_load.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Smart-Grid Load Dynamics</span>
+          </a>
+          
+          <a href="../chapters/03_battery_degradation.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Battery EIS & Degradation</span>
+          </a>
+          
+          <a href="../chapters/04_nuclear_core_temp.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Nuclear Core Heat PINN</span>
+          </a>
+          
+          <a href="../chapters/05_solar_irradiance.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Solar Irradiance Forecasting</span>
+          </a>
+          
+          <a href="../chapters/06_pipeline_leak.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Pipeline Acoustic Leak Detection</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 2: Aerospace, Defense & Automotive</span>
+            <span class="toc-badge">Projects 07–12</span>
+          </div>
+          
+          <a href="../chapters/07_supersonic_airfoil.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Supersonic Airfoil Optimization</span>
+          </a>
+          
+          <a href="../chapters/08_orbital_debris.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Orbital Debris Collision Avoidance</span>
+          </a>
+          
+          <a href="../chapters/09_lidar_radar_fusion.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Autonomous LiDAR-Radar Fusion</span>
+          </a>
+          
+          <a href="../chapters/10_turbine_vibration.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Jet Engine Vibration Anomaly</span>
+          </a>
+          
+          <a href="../chapters/11_ballistic_monte_carlo.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Ballistic Wind-Drift Trajectory</span>
+          </a>
+          
+          <a href="../chapters/12_crash_mesh_deform.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Crash-Test Mesh Deformation</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 3: Semiconductors, Manufacturing & Materials</span>
+            <span class="toc-badge">Projects 13–18</span>
+          </div>
+          
+          <a href="../chapters/13_crystal_dft_surrogate.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Crystal DFT Surrogate</span>
+          </a>
+          
+          <a href="../chapters/14_wafer_defect_cv.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Wafer Photolithography Defect CV</span>
+          </a>
+          
+          <a href="../chapters/15_microchip_thermal.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">3D Microchip Thermal Dissipation</span>
+          </a>
+          
+          <a href="../chapters/16_superconductor_tc.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Superconductor Tc Discovery</span>
+          </a>
+          
+          <a href="../chapters/17_melt_pool_instability.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Laser Melt-Pool Instability</span>
+          </a>
+          
+          <a href="../chapters/18_cyclic_fatigue_life.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Cyclic Fatigue Crack Life</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 4: Earth Sciences, Climate & Infrastructure</span>
+            <span class="toc-badge">Projects 19–24</span>
+          </div>
+          
+          <a href="../chapters/19_earthquake_triangulation.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Seismic Wave Triangulation</span>
+          </a>
+          
+          <a href="../chapters/20_flood_inundation.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Urban Flood Inundation</span>
+          </a>
+          
+          <a href="../chapters/21_ocean_microplastics.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Ocean Microplastic Tracking</span>
+          </a>
+          
+          <a href="../chapters/22_building_seismic_damping.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Building Seismic Resonance</span>
+          </a>
+          
+          <a href="../chapters/23_atmospheric_carbon.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Atmospheric Carbon Plume</span>
+          </a>
+          
+          <a href="../chapters/24_glacier_mass_balance.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Glacier Creep & Mass Balance</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 5: Finance, Healthcare & Complex Systems</span>
+            <span class="toc-badge">Projects 25–30</span>
+          </div>
+          
+          <a href="../chapters/25_market_volatility_ising.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Market Volatility Ising Models</span>
+          </a>
+          
+          <a href="../chapters/26_aneurysm_blood_flow.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Cerebral Aneurysm Hemodynamics</span>
+          </a>
+          
+          <a href="../chapters/27_accelerated_mri_cs.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Accelerated MRI Compressed Sensing</span>
+          </a>
+          
+          <a href="../chapters/28_hft_queue_mechanics.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Order Book Queue Mechanics</span>
+          </a>
+          
+          <a href="../chapters/29_corneal_wavefront.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Corneal Optical Wavefront</span>
+          </a>
+          
+          <a href="../chapters/30_traffic_phase_lwr.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Highway Traffic Phase Transitions</span>
+          </a>
+          
+        </div>
+        
+      </nav>
+
+      <div class="sidebar-footer">
+        <span>v1.0 &bull; 2026 Edition</span>
+        <button class="theme-toggle-btn" aria-label="Toggle dark/light mode">
+          <span class="theme-mode-text">☀️ Light</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- 2. Main Content Center Pane -->
+    <main class="main-wrapper">
+      <article class="content-container">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+          <a href="../index.html">Home</a>
+          <span>&rsaquo;</span>
+          <span>Foundations & Reference</span>
+          <span>&rsaquo;</span>
+          <span style="color: var(--text-primary); font-weight: 500;">
+            Open Datasets Catalog
+          </span>
+        </div>
+
+        <!-- Chapter Header Badge -->
+        <div class="chapter-meta-badge">
+          <span>🏷️ Data Engineering & Remote Sensing</span>
+          <span>&bull;</span>
+          <span>⚙️ Practical Guide</span>
+          <span>&bull;</span>
+          <span>⏱️ 15 min read</span>
+        </div>
+
+        <h1>Sensor Telemetry & Open Physical Benchmark Datasets</h1>
+        <div class="chapter-subtitle">Verified Catalog of NOAA, NREL, NASA, USGS, and fastMRI Telemetry Repositories</div>
+
+        <!-- Rendered Chapter Body -->
+        <div class="chapter-body">
+          <p>While every capstone in this volume features a self-contained synthetic physics generator to ensure zero broken external dependencies, transitioning to real-world industrial validation requires accessing curated open physics and telemetry repositories.</p>
+<p>Below is the verified master catalog of official open-access physical benchmark datasets across energy, aerospace, manufacturing, earth sciences, and healthcare.</p>
+<hr />
+<h2 id="1-energy-utilities-thermal-systems">1. Energy, Utilities &amp; Thermal Systems</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Dataset Name</th>
+<th style="text-align: left;">Curating Agency / Institution</th>
+<th style="text-align: left;">Domain &amp; Physical Content</th>
+<th style="text-align: left;">Data Modality &amp; Format</th>
+<th style="text-align: left;">Access Protocol / URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>NREL WIND Toolkit</strong></td>
+<td style="text-align: left;">National Renewable Energy Laboratory</td>
+<td style="text-align: left;">High-resolution 2km atmospheric boundary layer wind velocity, temperature, and pressure fields across the continental US.</td>
+<td style="text-align: left;">HDF5, NetCDF, AWS S3 Open Data</td>
+<td style="text-align: left;"><code>s3://nrel-pds-wtk/</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NASA Ames Battery Aging Repository</strong></td>
+<td style="text-align: left;">NASA Prognostics Center of Excellence</td>
+<td style="text-align: left;">Li-ion 18650 cell cycling telemetry across accelerated degradation protocols with electrochemical impedance spectroscopy (EIS).</td>
+<td style="text-align: left;">MATLAB <code>.mat</code>, CSV</td>
+<td style="text-align: left;"><code>ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NREL NSRDB (Solar Radiation)</strong></td>
+<td style="text-align: left;">National Renewable Energy Laboratory</td>
+<td style="text-align: left;">4km gridded Direct Normal Irradiance (DNI), Global Horizontal Irradiance (GHI), and optical aerosol depths from geostationary satellites.</td>
+<td style="text-align: left;">REST API, HDF5</td>
+<td style="text-align: left;"><code>developer.nrel.gov/docs/solar/nsrdb/</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PJM Synchrophasor Telemetry</strong></td>
+<td style="text-align: left;">PJM Interconnection &amp; DOE</td>
+<td style="text-align: left;">Phasor Measurement Unit (PMU) 30–60 Hz high-frequency electrical bus frequency, voltage angles, and transmission line active power.</td>
+<td style="text-align: left;">IEEE C37.118 streaming, CSV</td>
+<td style="text-align: left;">Open EI Grid Data / DOE</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-aerospace-defense-automotive">2. Aerospace, Defense &amp; Automotive</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Dataset Name</th>
+<th style="text-align: left;">Curating Agency / Institution</th>
+<th style="text-align: left;">Domain &amp; Physical Content</th>
+<th style="text-align: left;">Data Modality &amp; Format</th>
+<th style="text-align: left;">Access Protocol / URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>NASA OpenVSP Airfoil &amp; Wing Datasets</strong></td>
+<td style="text-align: left;">NASA Langley Research Center</td>
+<td style="text-align: left;">3D subsonic and supersonic aerodynamic pressure coefficients, lift, wave drag, and surface mesh geometries.</td>
+<td style="text-align: left;">XML, STL, OpenVSP <code>.vsp3</code></td>
+<td style="text-align: left;"><code>openvsp.org</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Space-Track.org Satellite Catalog</strong></td>
+<td style="text-align: left;">US Space Command (18th Space Defense)</td>
+<td style="text-align: left;">Two-Line Element (TLE) and Conjunction Data Messages (CDM) for 45,000+ active satellites and orbital debris fragments.</td>
+<td style="text-align: left;">JSON REST API, TLE format</td>
+<td style="text-align: left;"><code>space-track.org</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NASA Turbofan Engine Degradation (C-MAPSS)</strong></td>
+<td style="text-align: left;">NASA Ames Research Center</td>
+<td style="text-align: left;">Run-to-failure vibration, pressure, and thermal sensor streams from 21 turbofan engine telemetry channels across altitude cycles.</td>
+<td style="text-align: left;">Tabular text, CSV</td>
+<td style="text-align: left;">NASA Prognostics Repository</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>nuScenes 4D Radar &amp; LiDAR Dataset</strong></td>
+<td style="text-align: left;">Motional</td>
+<td style="text-align: left;">Full multimodal autonomous vehicle sensor suite with 32-beam LiDAR point clouds and 4D imaging radar velocity vectors.</td>
+<td style="text-align: left;">JSON, binary <code>.pcd</code>, ROS bags</td>
+<td style="text-align: left;"><code>nuscenes.org</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-materials-manufacturing-semiconductors">3. Materials, Manufacturing &amp; Semiconductors</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Dataset Name</th>
+<th style="text-align: left;">Curating Agency / Institution</th>
+<th style="text-align: left;">Domain &amp; Physical Content</th>
+<th style="text-align: left;">Data Modality &amp; Format</th>
+<th style="text-align: left;">Access Protocol / URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>The Materials Project</strong></td>
+<td style="text-align: left;">Lawrence Berkeley National Laboratory</td>
+<td style="text-align: left;">DFT-calculated formation energies, bandgaps, crystal structures (CIF), and phonon density of states for 150,000+ inorganic compounds.</td>
+<td style="text-align: left;">REST API (<code>mp-api</code>), JSON, CIF</td>
+<td style="text-align: left;"><code>materialsproject.org</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NIST Superconducting Materials Database</strong></td>
+<td style="text-align: left;">National Institute of Standards &amp; Tech</td>
+<td style="text-align: left;">Evaluated critical temperatures ($T_c$), critical magnetic fields ($H_{c2}$), and chemical stoichiometries for superconductor alloys.</td>
+<td style="text-align: left;">CSV, NIST Standard Reference</td>
+<td style="text-align: left;"><code>data.nist.gov</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>WM-811K Wafer Map Dataset</strong></td>
+<td style="text-align: left;">Taiwan Semiconductor Reliability Lab</td>
+<td style="text-align: left;">811,457 real fabrication semiconductor wafer maps with expert-labeled defect patterns (Center, Donut, Scratch, Edge-Ring).</td>
+<td style="text-align: left;">Pickle, NumPy <code>.npy</code></td>
+<td style="text-align: left;">Academic open mirror</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NIST Additive Manufacturing Benchmark (AM-Bench)</strong></td>
+<td style="text-align: left;">NIST Engineering Laboratory</td>
+<td style="text-align: left;">High-speed infrared thermal video and in-situ X-ray radiographs of titanium laser powder bed fusion (L-PBF) melt-pool keyhole dynamics.</td>
+<td style="text-align: left;">TIFF image stacks, NetCDF</td>
+<td style="text-align: left;"><code>nist.gov/ambench</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-earth-sciences-ocean-infrastructure">4. Earth Sciences, Ocean &amp; Infrastructure</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Dataset Name</th>
+<th style="text-align: left;">Curating Agency / Institution</th>
+<th style="text-align: left;">Domain &amp; Physical Content</th>
+<th style="text-align: left;">Data Modality &amp; Format</th>
+<th style="text-align: left;">Access Protocol / URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>USGS Northern California Seismic Network</strong></td>
+<td style="text-align: left;">US Geological Survey (USGS)</td>
+<td style="text-align: left;">Broadband 100 Hz seismograph waveforms with precise $P$-wave and $S$-wave arrival pick catalogs and hypocenter coordinates.</td>
+<td style="text-align: left;">MiniSEED, QuakeML, FDSN Web API</td>
+<td style="text-align: left;"><code>service.iris.edu/fdsnws/dataselect/1/</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Copernicus CMEMS Ocean Altimetry</strong></td>
+<td style="text-align: left;">European Space Agency (ESA) &amp; Mercator Ocean</td>
+<td style="text-align: left;">Global gridded daily sea surface heights ($\eta$), geostrophic surface currents ($u, v$), and Stokes drift wave fields at $0.08^\circ$ resolution.</td>
+<td style="text-align: left;">NetCDF-4, OPeNDAP</td>
+<td style="text-align: left;"><code>marine.copernicus.eu</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Open-Elevation Global 30m DEM</strong></td>
+<td style="text-align: left;">NASA SRTM &amp; USGS</td>
+<td style="text-align: left;">Global Digital Elevation Model (DEM) topographic grids for catchment runoff, slope gradients, and hydrodynamic inundation modeling.</td>
+<td style="text-align: left;">GeoTIFF, REST API</td>
+<td style="text-align: left;"><code>open-elevation.com</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>EPA Air Quality System (AQS)</strong></td>
+<td style="text-align: left;">US Environmental Protection Agency</td>
+<td style="text-align: left;">Hourly ground-level greenhouse gas concentrations ($\text{CO}_2, \text{CH}_4, \text{NO}_2, \text{SO}_2$) across industrial fence-line monitor stations.</td>
+<td style="text-align: left;">CSV, EPA AQS REST API</td>
+<td style="text-align: left;"><code>aqs.epa.gov/aqsweb/documents/data_api.html</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-biomedical-healthcare-complex-systems">5. Biomedical, Healthcare &amp; Complex Systems</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Dataset Name</th>
+<th style="text-align: left;">Curating Agency / Institution</th>
+<th style="text-align: left;">Domain &amp; Physical Content</th>
+<th style="text-align: left;">Data Modality &amp; Format</th>
+<th style="text-align: left;">Access Protocol / URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>fastMRI Dataset</strong></td>
+<td style="text-align: left;">NYU Langone Health &amp; Meta AI</td>
+<td style="text-align: left;">Largest public raw raw $k$-space MRI dataset containing 1,500+ fully-sampled clinical knee and brain acquisitions from 1.5T and 3.0T scanners.</td>
+<td style="text-align: left;">HDF5 (complex $k$-space arrays)</td>
+<td style="text-align: left;"><code>fastmri.med.nyu.edu</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Aneurisk Cerebral Vascular Morphology</strong></td>
+<td style="text-align: left;">Politecnico di Milano &amp; Emory University</td>
+<td style="text-align: left;">3D surface meshes and pulsatile inlet flow profiles for 100+ patient-specific cerebral aneurysm geometries reconstructed from 3D rotational angiography.</td>
+<td style="text-align: left;">VTK (<code>.vmtk</code>), STL, CSV</td>
+<td style="text-align: left;"><code>ecm2.mathcs.emory.edu/aneurisk/</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>LOBSTER High-Frequency Limit Order Book</strong></td>
+<td style="text-align: left;">Humboldt University Berlin</td>
+<td style="text-align: left;">Nanosecond-timestamped limit order submissions, cancellations, and executions across all price levels for NASDAQ equities.</td>
+<td style="text-align: left;">CSV, binary tick data</td>
+<td style="text-align: left;"><code>lobsterdata.com</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Caltrans PeMS Highway Sensor Network</strong></td>
+<td style="text-align: left;">California Department of Transportation</td>
+<td style="text-align: left;">30-second loop detector vehicular flow ($q$), occupancy, and speed ($v$) across 39,000 spatial highway lane detectors.</td>
+<td style="text-align: left;">Tabular text, CSV</td>
+<td style="text-align: left;"><code>pems.dot.ca.gov</code></td>
+</tr>
+</tbody>
+</table>
+        </div>
+
+        <!-- Bottom Chapter Pagination -->
+        <div class="chapter-nav-cards">
+          
+          <a href="../chapters/benchmarks.html" class="chapter-nav-card prev">
+            <span class="chapter-nav-label">&larr; Previous Capstone</span>
+            <span class="chapter-nav-title">: Industrial ROI Benchmarks</span>
+          </a>
+          
+
+          
+          <a href="../chapters/glossary.html" class="chapter-nav-card next">
+            <span class="chapter-nav-label">Next Capstone &rarr;</span>
+            <span class="chapter-nav-title">: Physics-ML Glossary</span>
+          </a>
+          
+        </div>
+      </article>
+
+      <!-- 3. Right Sidebar ("On This Page" Section Anchor Tracker) -->
+      <aside class="right-toc">
+        <div class="right-toc-title">On This Page</div>
+        <ul class="right-toc-links">
+          <li><a href="#1-the-physical-principle" class="right-toc-link">1. Physical Principle</a></li>
+          <li><a href="#2-industrial-context-roi" class="right-toc-link">2. Industrial ROI</a></li>
+          <li><a href="#3-data-acquisition-synthetic-physics-solver" class="right-toc-link">3. Synthetic Solver</a></li>
+          <li><a href="#4-data-science-physics-ml-workflow" class="right-toc-link">4. Physics-ML Workflow</a></li>
+          <li><a href="#5-interactive-visualization-diagnostics" class="right-toc-link">5. Diagnostics & Viz</a></li>
+          <li><a href="#6-production-deployment-notes" class="right-toc-link">6. Deployment Notes</a></li>
+        </ul>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Search Modal Backdrop & Dialog -->
+  <div class="search-modal-backdrop" id="search-modal-backdrop">
+    <div class="search-modal">
+      <div class="search-modal-header">
+        <span style="font-size: 1.1rem; color: var(--text-muted);">🔍</span>
+        <input type="text" class="search-modal-input" id="search-modal-input" placeholder="Search physics equations, models, or industries..." autocomplete="off">
+        <button style="background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--text-muted);" onclick="document.getElementById('search-modal-backdrop').classList.remove('open')">&times;</button>
+      </div>
+      <div class="search-modal-results" id="search-modal-results"></div>
+    </div>
+  </div>
+
+  <script src="../assets/main.js"></script>
+  <script src="../assets/search.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+[project]
+name = "book-physics-ml"
+version = "1.0.0"
+description = "Data Science & Machine Learning for Physics: 30 Capstone Projects Across Industries"
+authors = [
+    { name = "Physics-ML Author & Engineer" }
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=2.0.0",
+    "scipy>=1.14.0",
+    "pandas>=2.2.0",
+    "scikit-learn>=1.5.0",
+    "matplotlib>=3.9.0",
+    "plotly>=5.24.0",
+    "markdown>=3.6",
+    "pygments>=2.18.0",
+    "jinja2>=3.1.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
