@@ -124,6 +124,17 @@
           <span>🔍 Quick search...</span>
           <span class="search-shortcut">/</span>
         </button>
+
+        <!-- Reading Progress Tracker -->
+        <div class="sidebar-progress-container" id="sidebar-progress-container">
+          <div class="sidebar-progress-header">
+            <span>Reading Progress</span>
+            <span id="sidebar-progress-text">0/36 (0%)</span>
+          </div>
+          <div class="sidebar-progress-bar-bg">
+            <div class="sidebar-progress-bar-fill" id="sidebar-progress-fill"></div>
+          </div>
+        </div>
       </div>
 
       <nav class="sidebar-nav">
@@ -397,6 +408,63 @@
         <h1>High-Frequency Limit Order Book Queue Dynamics</h1>
         <div class="chapter-subtitle">Fokker-Planck Diffusion PDEs & Microstructure Particle Surrogates</div>
 
+        <!-- Chapter Action Toolbar -->
+        <div class="chapter-action-bar">
+          
+          <a href="https://colab.research.google.com/github/flugelsoft-01/physics-ml-book/blob/main/notebooks/28_hft_queue_mechanics.ipynb" target="_blank" rel="noopener noreferrer" class="action-btn action-colab" title="Launch on Cloud GPU with Google Colab">
+            <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab" class="colab-badge-img">
+          </a>
+          
+          
+          
+          <a href="../notebooks/28_hft_queue_mechanics.ipynb" download class="action-btn" title="Download Jupyter Notebook (.ipynb)">
+            <span>📥 Download .ipynb</span>
+          </a>
+          
+
+          
+          <button class="action-btn action-pyodide-trigger" id="pyodide-toggle-btn" title="Run in-browser Python (WebAssembly)">
+            <span>⚡ Run Live in Browser</span>
+          </button>
+          
+
+          <button class="action-btn action-complete-toggle" data-slug="28_hft_queue_mechanics" id="mark-complete-btn" title="Toggle chapter completion status">
+            <span class="complete-checkbox-icon">☐</span>
+            <span class="complete-checkbox-text">Mark Completed</span>
+          </button>
+        </div>
+
+        <!-- In-Browser Pyodide Execution Workbench Drawer / Panel -->
+        
+        <div class="pyodide-workbench-panel" id="pyodide-workbench-panel">
+          <div class="pyodide-workbench-header">
+            <div class="pyodide-workbench-title">
+              <span>⚡ WebAssembly Python Workbench (Pyodide)</span>
+              <span class="pyodide-status-badge" id="pyodide-status-badge">Click 'Run Code' or Shift+Enter to execute</span>
+            </div>
+            <button class="pyodide-close-btn" id="pyodide-close-btn" aria-label="Close runner">&times;</button>
+          </div>
+
+          <div class="pyodide-editor-container">
+            <textarea class="pyodide-code-editor" id="pyodide-code-editor" spellcheck="false" placeholder="# Type Python code here..."></textarea>
+          </div>
+
+          <div class="pyodide-controls">
+            <button class="btn-pyodide-run" id="pyodide-run-btn">▶ Run Code</button>
+            <button class="btn-pyodide-reset" id="pyodide-reset-btn">↺ Reset Code</button>
+            <span style="font-size: 0.78rem; color: var(--text-muted); margin-left: auto;">Press <kbd style="background: var(--bg-surface); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border-color); font-family: var(--font-mono);">Shift+Enter</kbd> to run</span>
+          </div>
+
+          <div class="pyodide-outputs">
+            <div class="pyodide-output-label">Terminal Console Output</div>
+            <div class="pyodide-terminal-output" id="pyodide-terminal-output">
+              <div class="terminal-placeholder">Simulation output and stdout logs will appear here after execution...</div>
+            </div>
+            <div class="pyodide-plot-output" id="pyodide-plot-output" style="display: none;"></div>
+          </div>
+        </div>
+        
+
         <!-- Rendered Chapter Body -->
         <div class="chapter-body">
           <h2 id="1-the-physical-principle">1. The Physical Principle</h2>
@@ -522,5 +590,6 @@
 
   <script src="../assets/main.js"></script>
   <script src="../assets/search.js"></script>
+  <script src="../assets/pyodide-runner.js"></script>
 </body>
 </html>
