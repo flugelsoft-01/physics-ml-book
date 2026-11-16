@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foundations & Paradigms of Physics-Informed ML | Data Science & Machine Learning for Physics</title>
+
+  <!-- Favicon & App Icons -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../assets/site.webmanifest">
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- Primary SEO Meta Tags -->
+  <meta name="title" content="Foundations & Paradigms of Physics-Informed ML | Data Science & Machine Learning for Physics">
+  <meta name="description" content="Buckingham Pi, Equivariance, PINNs, and Neural Operators (FNO & DeepONet) - Capstone Project in Foundations & Reference covering governing physical equations, synthetic solvers, and PINN architectures.">
+  <meta name="keywords" content="Buckingham Pi, PINN, Fourier Neural Operator, DeepONet, Inductive Bias, Equivariance, Physics-Informed Neural Networks, PINN, Scientific Machine Learning, SciML, Differential Equations">
+  <meta name="author" content="Data Science & ML for Physics Authors">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://physics-ml-book.org/chapters/foundations.html">
+
+  <!-- GEO & Regional Metadata -->
+  <meta name="geo.region" content="US-CA">
+  <meta name="geo.placename" content="San Francisco, California">
+  <meta name="geo.position" content="37.7749;-122.4194">
+  <meta name="ICBM" content="37.7749, -122.4194">
+  <meta name="DC.title" content="Foundations & Paradigms of Physics-Informed ML">
+  <meta name="DC.subject" content="Physics-Informed Machine Learning, Computational Engineering">
+  <meta name="DC.coverage" content="World">
+
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Data Science & Machine Learning for Physics: 30 Capstone Projects Across Industries">
+  <meta property="og:title" content="Foundations & Paradigms of Physics-Informed ML">
+  <meta property="og:description" content="Buckingham Pi, Equivariance, PINNs, and Neural Operators (FNO & DeepONet)">
+  <meta property="og:url" content="https://physics-ml-book.org/chapters/foundations.html">
+  <meta property="og:image" content="https://physics-ml-book.org/assets/apple-touch-icon.png">
+  <meta property="og:image:alt" content="Physics-ML Icon">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="en_GB">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Foundations & Paradigms of Physics-Informed ML">
+  <meta name="twitter:description" content="Buckingham Pi, Equivariance, PINNs, and Neural Operators (FNO & DeepONet)">
+  <meta name="twitter:image" content="https://physics-ml-book.org/assets/apple-touch-icon.png">
+
+  <!-- JSON-LD Structured Data Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Foundations & Paradigms of Physics-Informed ML",
+    "description": "Buckingham Pi, Equivariance, PINNs, and Neural Operators (FNO & DeepONet)",
+    "articleSection": "Foundations & Reference",
+    "keywords": "Buckingham Pi, PINN, Fourier Neural Operator, DeepONet, Inductive Bias, Equivariance",
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "isPartOf": {
+      "@type": "Book",
+      "name": "Data Science & Machine Learning for Physics: 30 Capstone Projects Across Industries",
+      "url": "https://physics-ml-book.org"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Physics-ML Technical Monograph Publishing"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="../assets/style.css">
+  
+  <!-- KaTeX for ultra-fast LaTeX math rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ],
+      throwOnError: false
+    });"></script>
+
+  <!-- Plotly.js for interactive physics diagnostics -->
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+</head>
+<body data-basepath="../">
+
+  <!-- Mobile Top Navigation Bar -->
+  <div class="mobile-topbar">
+    <button class="mobile-menu-btn" aria-label="Toggle Navigation">☰</button>
+    <a href="../index.html" class="book-title-badge">
+      <span class="book-icon">⚛</span>
+      <span class="book-title-text">Physics-ML Book</span>
+    </a>
+    <button class="search-box-btn trigger-search-btn" style="width: auto; padding: 6px 10px;">🔍</button>
+  </div>
+
+  <div class="app-wrapper">
+    <!-- 1. Left Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="book-title-badge">
+          <div class="book-icon">⚛</div>
+          <div class="book-title-text">DS & ML for Physics<br><small style="font-weight: 400; color: var(--text-muted); font-size: 0.75rem;">30 Capstone Projects</small></div>
+        </a>
+        <button class="search-box-btn trigger-search-btn">
+          <span>🔍 Quick search...</span>
+          <span class="search-shortcut">/</span>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Foundations & Reference</span>
+            <span class="toc-badge">Guides</span>
+          </div>
+          
+          <a href="../chapters/foundations.html" class="toc-item active">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Paradigms of Physics-ML</span>
+          </a>
+          
+          <a href="../chapters/notation.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Notation & Dimensionless Numbers</span>
+          </a>
+          
+          <a href="../chapters/benchmarks.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Industrial ROI Benchmarks</span>
+          </a>
+          
+          <a href="../chapters/datasets.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Open Datasets Catalog</span>
+          </a>
+          
+          <a href="../chapters/glossary.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Physics-ML Glossary</span>
+          </a>
+          
+          <a href="../chapters/playground.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Live Interactive Sandbox</span>
+          </a>
+          
+        </div>
+        
+
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 1: Energy & Power Systems</span>
+            <span class="toc-badge">Projects 01–06</span>
+          </div>
+          
+          <a href="../chapters/01_wind_wake.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Wind Turbine Wake Modeling</span>
+          </a>
+          
+          <a href="../chapters/02_smart_grid_load.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Smart-Grid Load Dynamics</span>
+          </a>
+          
+          <a href="../chapters/03_battery_degradation.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Battery EIS & Degradation</span>
+          </a>
+          
+          <a href="../chapters/04_nuclear_core_temp.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Nuclear Core Heat PINN</span>
+          </a>
+          
+          <a href="../chapters/05_solar_irradiance.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Solar Irradiance Forecasting</span>
+          </a>
+          
+          <a href="../chapters/06_pipeline_leak.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Pipeline Acoustic Leak Detection</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 2: Aerospace, Defense & Automotive</span>
+            <span class="toc-badge">Projects 07–12</span>
+          </div>
+          
+          <a href="../chapters/07_supersonic_airfoil.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Supersonic Airfoil Optimization</span>
+          </a>
+          
+          <a href="../chapters/08_orbital_debris.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Orbital Debris Collision Avoidance</span>
+          </a>
+          
+          <a href="../chapters/09_lidar_radar_fusion.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Autonomous LiDAR-Radar Fusion</span>
+          </a>
+          
+          <a href="../chapters/10_turbine_vibration.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Jet Engine Vibration Anomaly</span>
+          </a>
+          
+          <a href="../chapters/11_ballistic_monte_carlo.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Ballistic Wind-Drift Trajectory</span>
+          </a>
+          
+          <a href="../chapters/12_crash_mesh_deform.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Crash-Test Mesh Deformation</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 3: Semiconductors, Manufacturing & Materials</span>
+            <span class="toc-badge">Projects 13–18</span>
+          </div>
+          
+          <a href="../chapters/13_crystal_dft_surrogate.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Crystal DFT Surrogate</span>
+          </a>
+          
+          <a href="../chapters/14_wafer_defect_cv.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Wafer Photolithography Defect CV</span>
+          </a>
+          
+          <a href="../chapters/15_microchip_thermal.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">3D Microchip Thermal Dissipation</span>
+          </a>
+          
+          <a href="../chapters/16_superconductor_tc.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Superconductor Tc Discovery</span>
+          </a>
+          
+          <a href="../chapters/17_melt_pool_instability.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Laser Melt-Pool Instability</span>
+          </a>
+          
+          <a href="../chapters/18_cyclic_fatigue_life.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Cyclic Fatigue Crack Life</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 4: Earth Sciences, Climate & Infrastructure</span>
+            <span class="toc-badge">Projects 19–24</span>
+          </div>
+          
+          <a href="../chapters/19_earthquake_triangulation.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Seismic Wave Triangulation</span>
+          </a>
+          
+          <a href="../chapters/20_flood_inundation.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Urban Flood Inundation</span>
+          </a>
+          
+          <a href="../chapters/21_ocean_microplastics.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Ocean Microplastic Tracking</span>
+          </a>
+          
+          <a href="../chapters/22_building_seismic_damping.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Building Seismic Resonance</span>
+          </a>
+          
+          <a href="../chapters/23_atmospheric_carbon.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Atmospheric Carbon Plume</span>
+          </a>
+          
+          <a href="../chapters/24_glacier_mass_balance.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Glacier Creep & Mass Balance</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 5: Finance, Healthcare & Complex Systems</span>
+            <span class="toc-badge">Projects 25–30</span>
+          </div>
+          
+          <a href="../chapters/25_market_volatility_ising.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Market Volatility Ising Models</span>
+          </a>
+          
+          <a href="../chapters/26_aneurysm_blood_flow.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Cerebral Aneurysm Hemodynamics</span>
+          </a>
+          
+          <a href="../chapters/27_accelerated_mri_cs.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Accelerated MRI Compressed Sensing</span>
+          </a>
+          
+          <a href="../chapters/28_hft_queue_mechanics.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Order Book Queue Mechanics</span>
+          </a>
+          
+          <a href="../chapters/29_corneal_wavefront.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Corneal Optical Wavefront</span>
+          </a>
+          
+          <a href="../chapters/30_traffic_phase_lwr.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Highway Traffic Phase Transitions</span>
+          </a>
+          
+        </div>
+        
+      </nav>
+
+      <div class="sidebar-footer">
+        <span>v1.0 &bull; 2026 Edition</span>
+        <button class="theme-toggle-btn" aria-label="Toggle dark/light mode">
+          <span class="theme-mode-text">☀️ Light</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- 2. Main Content Center Pane -->
+    <main class="main-wrapper">
+      <article class="content-container">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+          <a href="../index.html">Home</a>
+          <span>&rsaquo;</span>
+          <span>Foundations & Reference</span>
+          <span>&rsaquo;</span>
+          <span style="color: var(--text-primary); font-weight: 500;">
+            Paradigms of Physics-ML
+          </span>
+        </div>
+
+        <!-- Chapter Header Badge -->
+        <div class="chapter-meta-badge">
+          <span>🏷️ Theoretical Physics & Foundations</span>
+          <span>&bull;</span>
+          <span>⚙️ Foundational</span>
+          <span>&bull;</span>
+          <span>⏱️ 20 min read</span>
+        </div>
+
+        <h1>Foundations & Paradigms of Physics-Informed ML</h1>
+        <div class="chapter-subtitle">Buckingham Pi, Equivariance, PINNs, and Neural Operators (FNO & DeepONet)</div>
+
+        <!-- Rendered Chapter Body -->
+        <div class="chapter-body">
+          <h2 id="1-the-core-dilemma-pure-data-driven-ml-vs-first-principles-physics">1. The Core Dilemma: Pure Data-Driven ML vs. First-Principles Physics</h2>
+<p>Traditional machine learning algorithms excel at interpolating high-dimensional patterns within the convex hull of their training distribution. However, when applied to physical and industrial systems, standard neural networks suffer from four fundamental failure modes:</p>
+<ol>
+<li><strong>Unphysical Extrapolation:</strong> Outside the training domain, pure black-box regressors violate elementary physical constraints (e.g., predicting negative mass, negative absolute temperatures, or non-zero divergence in incompressible flows).</li>
+<li><strong>Prohibitive Sample Complexity:</strong> Training high-capacity deep networks from scratch requires $10^5 - 10^7$ labeled training samples. In mission-critical engineering, collecting real physical sensor telemetry is costly, slow, and constrained by sensor survivability limits.</li>
+<li><strong>Severe Ill-Conditioning in Inverse Problems:</strong> Estimating hidden parameters (e.g., permeability fields, crack locations, thermal conductivity) from sparse boundary measurements is intrinsically ill-posed (Hadamard criterion); unconstrained models find spurious non-physical local minima.</li>
+<li><strong>Spectral Bias:</strong> Standard multilayer perceptrons exhibit spectral bias toward low-frequency Fourier components, struggling to capture sharp physical shock fronts, boundary layers, and turbulent cascades without explicit inductive bias.</li>
+</ol>
+<p>Physics-Informed Machine Learning resolves this dilemma by integrating first-principles governing laws directly into neural architectures, loss functions, and optimization graphs.</p>
+<hr />
+<h2 id="2-the-three-paradigms-of-physics-ml">2. The Three Paradigms of Physics-ML</h2>
+<p>Modern Physics-ML spans three distinct, complementary paradigms:</p>
+<div class="codehilite"><pre><span></span><code><span class="w">                                  </span><span class="n">PHYSICS</span><span class="o">-</span><span class="n">ML</span><span class="w"> </span><span class="n">PARADIGMS</span>
+<span class="w">                                            </span><span class="err">│</span>
+<span class="w">        </span><span class="err">┌───────────────────────────────────┼───────────────────────────────────┐</span>
+<span class="w">        </span><span class="err">▼</span><span class="w">                                   </span><span class="err">▼</span><span class="w">                                   </span><span class="err">▼</span>
+<span class="err">┌───────────────────────┐</span><span class="w">       </span><span class="err">┌───────────────────────┐</span><span class="w">       </span><span class="err">┌───────────────────────┐</span>
+<span class="err">│</span><span class="w">   </span><span class="n">PARADIGM</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="w">         </span><span class="err">│</span><span class="w">       </span><span class="err">│</span><span class="w">   </span><span class="n">PARADIGM</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span><span class="w">         </span><span class="err">│</span><span class="w">       </span><span class="err">│</span><span class="w">   </span><span class="n">PARADIGM</span><span class="w"> </span><span class="mi">3</span><span class="p">:</span><span class="w">         </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="n">Physics</span><span class="o">-</span><span class="n">Guided</span><span class="w">      </span><span class="err">│</span><span class="w">       </span><span class="err">│</span><span class="w">   </span><span class="n">Physics</span><span class="o">-</span><span class="n">Informed</span><span class="w">    </span><span class="err">│</span><span class="w">       </span><span class="err">│</span><span class="w">   </span><span class="n">Neural</span><span class="w"> </span><span class="n">Operator</span><span class="w">     </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="n">Feature</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Invariance</span><span class="err">│</span><span class="w">       </span><span class="err">│</span><span class="w">   </span><span class="n">Neural</span><span class="w"> </span><span class="n">Networks</span><span class="w">     </span><span class="err">│</span><span class="w">       </span><span class="err">│</span><span class="w">   </span><span class="n">Learning</span><span class="w">            </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="n">Engineering</span><span class="w">         </span><span class="err">│</span><span class="w">       </span><span class="err">│</span><span class="w">   </span><span class="p">(</span><span class="n">PINNs</span><span class="p">)</span><span class="w">             </span><span class="err">│</span><span class="w">       </span><span class="err">│</span><span class="w">   </span><span class="p">(</span><span class="n">FNO</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">DeepONet</span><span class="p">)</span><span class="w">    </span><span class="err">│</span>
+<span class="err">├───────────────────────┤</span><span class="w">       </span><span class="err">├───────────────────────┤</span><span class="w">       </span><span class="err">├───────────────────────┤</span>
+<span class="err">│</span><span class="w"> </span><span class="err">•</span><span class="w"> </span><span class="n">Buckingham</span><span class="w"> </span><span class="n">Pi</span><span class="w">       </span><span class="err">│</span><span class="w">       </span><span class="err">│</span><span class="w"> </span><span class="err">•</span><span class="w"> </span><span class="n">Autograd</span><span class="w"> </span><span class="n">PDE</span><span class="w"> </span><span class="n">losses</span><span class="w"> </span><span class="err">│</span><span class="w">       </span><span class="err">│</span><span class="w"> </span><span class="err">•</span><span class="w"> </span><span class="n">Mesh</span><span class="o">-</span><span class="n">independent</span><span class="w">   </span><span class="err">│</span>
+<span class="err">│</span><span class="w"> </span><span class="err">•</span><span class="w"> </span><span class="n">Galilean</span><span class="w"> </span><span class="n">Invariance</span><span class="w"> </span><span class="err">│</span><span class="w">       </span><span class="err">│</span><span class="w"> </span><span class="err">•</span><span class="w"> </span><span class="n">Collocation</span><span class="w"> </span><span class="n">points</span><span class="w">  </span><span class="err">│</span><span class="w">       </span><span class="err">│</span><span class="w"> </span><span class="err">•</span><span class="w"> </span><span class="n">Infinite</span><span class="o">-</span><span class="n">dim</span><span class="w"> </span><span class="n">mapping</span><span class="err">│</span>
+<span class="err">│</span><span class="w"> </span><span class="err">•</span><span class="w"> </span><span class="n">Coordinate</span><span class="w"> </span><span class="n">Equiv</span><span class="o">.</span><span class="w">   </span><span class="err">│</span><span class="w">       </span><span class="err">│</span><span class="w"> </span><span class="err">•</span><span class="w"> </span><span class="n">Boundary</span><span class="w"> </span><span class="n">penalties</span><span class="w">  </span><span class="err">│</span><span class="w">       </span><span class="err">│</span><span class="w"> </span><span class="err">•</span><span class="w"> </span><span class="n">Fourier</span><span class="w"> </span><span class="n">space</span><span class="w"> </span><span class="n">conv</span><span class="w">  </span><span class="err">│</span>
+<span class="err">└───────────────────────┘</span><span class="w">       </span><span class="err">└───────────────────────┘</span><span class="w">       </span><span class="err">└───────────────────────┘</span>
+</code></pre></div>
+
+<h3 id="paradigm-1-physics-guided-feature-invariance-engineering">Paradigm 1: Physics-Guided Feature &amp; Invariance Engineering</h3>
+<p>This approach embeds physical symmetries directly into the model inputs and network layers prior to optimization:</p>
+<ul>
+<li><strong>Dimensional Invariance (Buckingham $\pi$ Theorem):</strong> Any physically meaningful equation $f(q_1, q_2, \dots, q_n) = 0$ involving $n$ physical variables and $k$ independent physical dimensions can be rewritten in terms of $n - k$ dimensionless groups:</li>
+</ul>
+<div class="katex-display">$$\Pi_1 = \phi(\Pi_2, \dots, \Pi_{n-k})$$</div>
+<p>By training models strictly on dimensionless ratios (e.g. Reynolds number $Re = \frac{\rho v L}{\mu}$, Froude number $Fr = \frac{v}{\sqrt{gL}}$, Mach number $Ma = \frac{v}{a}$), predictions scale invariants across different scales.
+- <strong>Equivariance &amp; Frame Indifference (SE(3) / Galilean Symmetries):</strong> Physical laws do not change under spatial translation or rotation. Equivariant Graph Neural Networks (EGNNs) enforce:</p>
+<div class="katex-display">$$\mathbf{f}(\mathbf{R}\mathbf{x} + \mathbf{t}) = \mathbf{R} \mathbf{f}(\mathbf{x}) + \mathbf{t} \quad \forall \mathbf{R} \in SO(3), \mathbf{t} \in \mathbb{R}^3$$</div>
+<h3 id="paradigm-2-physics-informed-neural-networks-pinns">Paradigm 2: Physics-Informed Neural Networks (PINNs)</h3>
+<p>Pioneered by Raissi, Perdikaris, and Karniadakis (2019), PINNs enforce differential equations through the training objective function. Given a general parameterized non-linear PDE:</p>
+<div class="katex-display">$$\mathcal{N}[\mathbf{u}(\mathbf{x}, t); \boldsymbol{\lambda}] = \mathbf{f}(\mathbf{x}, t), \quad \mathbf{x} \in \Omega, \ t \in [0, T]$$</div>
+<p>with boundary condition $\mathcal{B}[\mathbf{u}] = \mathbf{g}(\mathbf{x}, t)$ on $\partial \Omega$ and initial condition $\mathbf{u}(\mathbf{x}, 0) = \mathbf{u}_0(\mathbf{x})$, a neural network $\widehat{\mathbf{u}}_\theta(\mathbf{x}, t)$ is optimized over a compound loss:</p>
+<div class="katex-display">$$\mathcal{L}(\theta) = \lambda_{\text{data}} \mathcal{L}_{\text{data}} + \lambda_{\text{pde}} \mathcal{L}_{\text{pde}} + \lambda_{\text{bc}} \mathcal{L}_{\text{bc}} + \lambda_{\text{ic}} \mathcal{L}_{\text{ic}}$$</div>
+<p>where the PDE residual loss is evaluated over $N_f$ interior <strong>collocation points</strong>:</p>
+<div class="katex-display">$$\mathcal{L}_{\text{pde}} = \frac{1}{N_f} \sum_{i=1}^{N_f} \left\| \mathcal{N}\left[\widehat{\mathbf{u}}_\theta(\mathbf{x}_i, t_i); \boldsymbol{\lambda}\right] - \mathbf{f}(\mathbf{x}_i, t_i) \right\|^2$$</div>
+<p>Exact partial derivatives (e.g., $\frac{\partial \widehat{\mathbf{u}}}{\partial t}$, $\nabla^2 \widehat{\mathbf{u}}$) are evaluated without numerical discretization truncation errors via automatic differentiation computational graphs:</p>
+<div class="katex-display">$$\frac{\partial \widehat{u}}{\partial x_j} = \sum_{k} \frac{\partial \widehat{u}}{\partial z_k} \frac{\partial z_k}{\partial x_j}$$</div>
+<h3 id="paradigm-3-neural-operator-learning-fno-deeponet">Paradigm 3: Neural Operator Learning (FNO &amp; DeepONet)</h3>
+<p>While PINNs solve a specific instance of a boundary value problem, <strong>Neural Operators</strong> learn the infinite-dimensional mapping between function spaces:</p>
+<div class="katex-display">$$\mathcal{G}: \mathcal{A} \to \mathcal{U}$$</div>
+<p>where $\mathcal{A}$ is a space of input functions (e.g. initial conditions $u_0(x)$, boundary forces, or heterogeneous permeability fields $a(x)$) and $\mathcal{U}$ is the corresponding solution field space $u(x, t)$.</p>
+<ul>
+<li><strong>Fourier Neural Operator (FNO):</strong> Computes global spatial convolutions in frequency space via the Fast Fourier Transform (FFT):</li>
+</ul>
+<div class="katex-display">$$v_{k+1}(x) = \sigma\left( W v_k(x) + \mathcal{F}^{-1}\left( R_\phi \cdot \mathcal{F}(v_k) \right)(x) \right)$$</div>
+<p>where $R_\phi$ parameterizes Fourier multiplier weights truncated at maximum wavenumber $k_{\text{max}}$.
+- <strong>Key Advantage:</strong> <strong>Zero-Shot Super-Resolution.</strong> Once trained on a coarse $64 \times 64$ numerical grid, an FNO can evaluate solution fields on an arbitrary $1024 \times 1024$ continuous mesh without retraining or loss of accuracy.</p>
+<hr />
+<h2 id="3-comparison-of-paradigms-across-industrial-engineering-metrics">3. Comparison of Paradigms Across Industrial Engineering Metrics</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Metric</th>
+<th style="text-align: left;">Classical CFD / FEA</th>
+<th style="text-align: left;">Pure Black-Box ML</th>
+<th style="text-align: left;">PINNs</th>
+<th style="text-align: left;">Neural Operators (FNO)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Inference Latency</strong></td>
+<td style="text-align: left;">$10^2 - 10^5 \text{ seconds}$</td>
+<td style="text-align: left;">$< 1 \text{ ms}$</td>
+<td style="text-align: left;">$1 - 10 \text{ ms}$</td>
+<td style="text-align: left;">$1 - 5 \text{ ms}$</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Training Time</strong></td>
+<td style="text-align: left;">N/A (Direct solver)</td>
+<td style="text-align: left;">Minutes to Hours</td>
+<td style="text-align: left;">Hours per instance</td>
+<td style="text-align: left;">Hours (amortized once)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Physical Fidelity</strong></td>
+<td style="text-align: left;">High (mesh-dependent)</td>
+<td style="text-align: left;">Very Low (unbounded)</td>
+<td style="text-align: left;">Very High ($L_{pde} \to 0$)</td>
+<td style="text-align: left;">High (data-dependent)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Mesh Invariance</strong></td>
+<td style="text-align: left;">None (tied to grid)</td>
+<td style="text-align: left;">None (fixed inputs)</td>
+<td style="text-align: left;">Continuous coordinate</td>
+<td style="text-align: left;">Infinite-dimensional</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Inverse Discovery</strong></td>
+<td style="text-align: left;">Extremely Expensive</td>
+<td style="text-align: left;">Infeasible</td>
+<td style="text-align: left;">Native (learns $\boldsymbol{\lambda}$)</td>
+<td style="text-align: left;">Requires inverse map</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-practical-implementation-workflow-a-5-step-checklist">4. Practical Implementation Workflow: A 5-Step Checklist</h2>
+<p>When tackling a new physical engineering capstone:</p>
+<ol>
+<li><strong>Identify the Invariant Group:</strong> Determine if the problem possesses translational, rotational, or scale symmetries.</li>
+<li><strong>Formulate the Residual Function:</strong> Write the strong-form governing equation $R(\mathbf{x}, t; \theta) = 0$ in symbolic KaTeX prior to coding.</li>
+<li><strong>Choose Collocation Density:</strong> Distribute collocation points adaptively—concentrate $70\%$ of collocation nodes near expected boundary layers, shocks, or high-gradient interfaces.</li>
+<li><strong>Balance Multi-Objective Loss Weights:</strong> Apply adaptive loss balancing (e.g. Learning Rate Annealing or GradNorm) so that stiff PDE residual gradients do not overpower data gradients:</li>
+</ol>
+<div class="katex-display">$$\lambda_{\text{pde}}^{(k+1)} = (1 - \alpha)\lambda_{\text{pde}}^{(k)} + \alpha \frac{\max_{\theta} |\nabla_\theta \mathcal{L}_{\text{data}}|}{\overline{|\nabla_\theta \mathcal{L}_{\text{pde}}|}}$$</div>
+<ol>
+<li><strong>Enforce Hard Boundary Conditions:</strong> Where possible, construct ansätze that satisfy boundary conditions by design:</li>
+</ol>
+<div class="katex-display">$$\widehat{u}(\mathbf{x}) = g(\mathbf{x}) + D(\mathbf{x}) \cdot \text{NN}(\mathbf{x})$$</div>
+<p>where $D(\mathbf{x}) = 0$ strictly on the boundary $\partial \Omega$.</p>
+        </div>
+
+        <!-- Bottom Chapter Pagination -->
+        <div class="chapter-nav-cards">
+          
+
+          
+          <a href="../chapters/notation.html" class="chapter-nav-card next">
+            <span class="chapter-nav-label">Next Capstone &rarr;</span>
+            <span class="chapter-nav-title">: Notation & Dimensionless Numbers</span>
+          </a>
+          
+        </div>
+      </article>
+
+      <!-- 3. Right Sidebar ("On This Page" Section Anchor Tracker) -->
+      <aside class="right-toc">
+        <div class="right-toc-title">On This Page</div>
+        <ul class="right-toc-links">
+          <li><a href="#1-the-physical-principle" class="right-toc-link">1. Physical Principle</a></li>
+          <li><a href="#2-industrial-context-roi" class="right-toc-link">2. Industrial ROI</a></li>
+          <li><a href="#3-data-acquisition-synthetic-physics-solver" class="right-toc-link">3. Synthetic Solver</a></li>
+          <li><a href="#4-data-science-physics-ml-workflow" class="right-toc-link">4. Physics-ML Workflow</a></li>
+          <li><a href="#5-interactive-visualization-diagnostics" class="right-toc-link">5. Diagnostics & Viz</a></li>
+          <li><a href="#6-production-deployment-notes" class="right-toc-link">6. Deployment Notes</a></li>
+        </ul>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Search Modal Backdrop & Dialog -->
+  <div class="search-modal-backdrop" id="search-modal-backdrop">
+    <div class="search-modal">
+      <div class="search-modal-header">
+        <span style="font-size: 1.1rem; color: var(--text-muted);">🔍</span>
+        <input type="text" class="search-modal-input" id="search-modal-input" placeholder="Search physics equations, models, or industries..." autocomplete="off">
+        <button style="background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--text-muted);" onclick="document.getElementById('search-modal-backdrop').classList.remove('open')">&times;</button>
+      </div>
+      <div class="search-modal-results" id="search-modal-results"></div>
+    </div>
+  </div>
+
+  <script src="../assets/main.js"></script>
+  <script src="../assets/search.js"></script>
+</body>
+</html>

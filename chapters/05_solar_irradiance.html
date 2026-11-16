@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solar Photovoltaic Irradiance Forecasting | Data Science & Machine Learning for Physics</title>
+
+  <!-- Favicon & App Icons -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../assets/site.webmanifest">
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- Primary SEO Meta Tags -->
+  <meta name="title" content="Solar Photovoltaic Irradiance Forecasting | Data Science & Machine Learning for Physics">
+  <meta name="description" content="Atmospheric Radiative Transfer & Optical Depth Attenuation Hybrid Models - Capstone Project in Part 1: Energy & Power Systems covering governing physical equations, synthetic solvers, and PINN architectures.">
+  <meta name="keywords" content="Beer-Lambert Law, Air Mass, Clearsky DNI, Atmospheric Attenuation, Hybrid ML, Physics-Informed Neural Networks, PINN, Scientific Machine Learning, SciML, Differential Equations">
+  <meta name="author" content="Data Science & ML for Physics Authors">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://physics-ml-book.org/chapters/05_solar_irradiance.html">
+
+  <!-- GEO & Regional Metadata -->
+  <meta name="geo.region" content="US-CA">
+  <meta name="geo.placename" content="San Francisco, California">
+  <meta name="geo.position" content="37.7749;-122.4194">
+  <meta name="ICBM" content="37.7749, -122.4194">
+  <meta name="DC.title" content="Solar Photovoltaic Irradiance Forecasting">
+  <meta name="DC.subject" content="Physics-Informed Machine Learning, Computational Engineering">
+  <meta name="DC.coverage" content="World">
+
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Data Science & Machine Learning for Physics: 30 Capstone Projects Across Industries">
+  <meta property="og:title" content="Solar Photovoltaic Irradiance Forecasting">
+  <meta property="og:description" content="Atmospheric Radiative Transfer & Optical Depth Attenuation Hybrid Models">
+  <meta property="og:url" content="https://physics-ml-book.org/chapters/05_solar_irradiance.html">
+  <meta property="og:image" content="https://physics-ml-book.org/assets/apple-touch-icon.png">
+  <meta property="og:image:alt" content="Physics-ML Icon">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="en_GB">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Solar Photovoltaic Irradiance Forecasting">
+  <meta name="twitter:description" content="Atmospheric Radiative Transfer & Optical Depth Attenuation Hybrid Models">
+  <meta name="twitter:image" content="https://physics-ml-book.org/assets/apple-touch-icon.png">
+
+  <!-- JSON-LD Structured Data Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Solar Photovoltaic Irradiance Forecasting",
+    "description": "Atmospheric Radiative Transfer & Optical Depth Attenuation Hybrid Models",
+    "articleSection": "Part 1: Energy & Power Systems",
+    "keywords": "Beer-Lambert Law, Air Mass, Clearsky DNI, Atmospheric Attenuation, Hybrid ML",
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "isPartOf": {
+      "@type": "Book",
+      "name": "Data Science & Machine Learning for Physics: 30 Capstone Projects Across Industries",
+      "url": "https://physics-ml-book.org"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Physics-ML Technical Monograph Publishing"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="../assets/style.css">
+  
+  <!-- KaTeX for ultra-fast LaTeX math rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ],
+      throwOnError: false
+    });"></script>
+
+  <!-- Plotly.js for interactive physics diagnostics -->
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+</head>
+<body data-basepath="../">
+
+  <!-- Mobile Top Navigation Bar -->
+  <div class="mobile-topbar">
+    <button class="mobile-menu-btn" aria-label="Toggle Navigation">☰</button>
+    <a href="../index.html" class="book-title-badge">
+      <span class="book-icon">⚛</span>
+      <span class="book-title-text">Physics-ML Book</span>
+    </a>
+    <button class="search-box-btn trigger-search-btn" style="width: auto; padding: 6px 10px;">🔍</button>
+  </div>
+
+  <div class="app-wrapper">
+    <!-- 1. Left Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="book-title-badge">
+          <div class="book-icon">⚛</div>
+          <div class="book-title-text">DS & ML for Physics<br><small style="font-weight: 400; color: var(--text-muted); font-size: 0.75rem;">30 Capstone Projects</small></div>
+        </a>
+        <button class="search-box-btn trigger-search-btn">
+          <span>🔍 Quick search...</span>
+          <span class="search-shortcut">/</span>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Foundations & Reference</span>
+            <span class="toc-badge">Guides</span>
+          </div>
+          
+          <a href="../chapters/foundations.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Paradigms of Physics-ML</span>
+          </a>
+          
+          <a href="../chapters/notation.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Notation & Dimensionless Numbers</span>
+          </a>
+          
+          <a href="../chapters/benchmarks.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Industrial ROI Benchmarks</span>
+          </a>
+          
+          <a href="../chapters/datasets.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Open Datasets Catalog</span>
+          </a>
+          
+          <a href="../chapters/glossary.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Physics-ML Glossary</span>
+          </a>
+          
+          <a href="../chapters/playground.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Live Interactive Sandbox</span>
+          </a>
+          
+        </div>
+        
+
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 1: Energy & Power Systems</span>
+            <span class="toc-badge">Projects 01–06</span>
+          </div>
+          
+          <a href="../chapters/01_wind_wake.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Wind Turbine Wake Modeling</span>
+          </a>
+          
+          <a href="../chapters/02_smart_grid_load.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Smart-Grid Load Dynamics</span>
+          </a>
+          
+          <a href="../chapters/03_battery_degradation.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Battery EIS & Degradation</span>
+          </a>
+          
+          <a href="../chapters/04_nuclear_core_temp.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Nuclear Core Heat PINN</span>
+          </a>
+          
+          <a href="../chapters/05_solar_irradiance.html" class="toc-item active">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Solar Irradiance Forecasting</span>
+          </a>
+          
+          <a href="../chapters/06_pipeline_leak.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Pipeline Acoustic Leak Detection</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 2: Aerospace, Defense & Automotive</span>
+            <span class="toc-badge">Projects 07–12</span>
+          </div>
+          
+          <a href="../chapters/07_supersonic_airfoil.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Supersonic Airfoil Optimization</span>
+          </a>
+          
+          <a href="../chapters/08_orbital_debris.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Orbital Debris Collision Avoidance</span>
+          </a>
+          
+          <a href="../chapters/09_lidar_radar_fusion.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Autonomous LiDAR-Radar Fusion</span>
+          </a>
+          
+          <a href="../chapters/10_turbine_vibration.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Jet Engine Vibration Anomaly</span>
+          </a>
+          
+          <a href="../chapters/11_ballistic_monte_carlo.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Ballistic Wind-Drift Trajectory</span>
+          </a>
+          
+          <a href="../chapters/12_crash_mesh_deform.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Crash-Test Mesh Deformation</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 3: Semiconductors, Manufacturing & Materials</span>
+            <span class="toc-badge">Projects 13–18</span>
+          </div>
+          
+          <a href="../chapters/13_crystal_dft_surrogate.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Crystal DFT Surrogate</span>
+          </a>
+          
+          <a href="../chapters/14_wafer_defect_cv.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Wafer Photolithography Defect CV</span>
+          </a>
+          
+          <a href="../chapters/15_microchip_thermal.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">3D Microchip Thermal Dissipation</span>
+          </a>
+          
+          <a href="../chapters/16_superconductor_tc.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Superconductor Tc Discovery</span>
+          </a>
+          
+          <a href="../chapters/17_melt_pool_instability.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Laser Melt-Pool Instability</span>
+          </a>
+          
+          <a href="../chapters/18_cyclic_fatigue_life.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Cyclic Fatigue Crack Life</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 4: Earth Sciences, Climate & Infrastructure</span>
+            <span class="toc-badge">Projects 19–24</span>
+          </div>
+          
+          <a href="../chapters/19_earthquake_triangulation.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Seismic Wave Triangulation</span>
+          </a>
+          
+          <a href="../chapters/20_flood_inundation.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Urban Flood Inundation</span>
+          </a>
+          
+          <a href="../chapters/21_ocean_microplastics.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Ocean Microplastic Tracking</span>
+          </a>
+          
+          <a href="../chapters/22_building_seismic_damping.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Building Seismic Resonance</span>
+          </a>
+          
+          <a href="../chapters/23_atmospheric_carbon.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Atmospheric Carbon Plume</span>
+          </a>
+          
+          <a href="../chapters/24_glacier_mass_balance.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Glacier Creep & Mass Balance</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 5: Finance, Healthcare & Complex Systems</span>
+            <span class="toc-badge">Projects 25–30</span>
+          </div>
+          
+          <a href="../chapters/25_market_volatility_ising.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Market Volatility Ising Models</span>
+          </a>
+          
+          <a href="../chapters/26_aneurysm_blood_flow.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Cerebral Aneurysm Hemodynamics</span>
+          </a>
+          
+          <a href="../chapters/27_accelerated_mri_cs.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Accelerated MRI Compressed Sensing</span>
+          </a>
+          
+          <a href="../chapters/28_hft_queue_mechanics.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Order Book Queue Mechanics</span>
+          </a>
+          
+          <a href="../chapters/29_corneal_wavefront.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Corneal Optical Wavefront</span>
+          </a>
+          
+          <a href="../chapters/30_traffic_phase_lwr.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Highway Traffic Phase Transitions</span>
+          </a>
+          
+        </div>
+        
+      </nav>
+
+      <div class="sidebar-footer">
+        <span>v1.0 &bull; 2026 Edition</span>
+        <button class="theme-toggle-btn" aria-label="Toggle dark/light mode">
+          <span class="theme-mode-text">☀️ Light</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- 2. Main Content Center Pane -->
+    <main class="main-wrapper">
+      <article class="content-container">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+          <a href="../index.html">Home</a>
+          <span>&rsaquo;</span>
+          <span>Part 1: Energy & Power Systems</span>
+          <span>&rsaquo;</span>
+          <span style="color: var(--text-primary); font-weight: 500;">
+            Project 05
+          </span>
+        </div>
+
+        <!-- Chapter Header Badge -->
+        <div class="chapter-meta-badge">
+          <span>🏷️ Solar Utilities & Energy Trading</span>
+          <span>&bull;</span>
+          <span>⚙️ Intermediate</span>
+          <span>&bull;</span>
+          <span>⏱️ 25 min read</span>
+        </div>
+
+        <h1>Solar Photovoltaic Irradiance Forecasting</h1>
+        <div class="chapter-subtitle">Atmospheric Radiative Transfer & Optical Depth Attenuation Hybrid Models</div>
+
+        <!-- Rendered Chapter Body -->
+        <div class="chapter-body">
+          <h2 id="1-the-physical-principle">1. The Physical Principle</h2>
+<p>Solar radiant flux reaching Earth's surface undergoes atmospheric scattering and absorption described by the <strong>Beer-Lambert-Bouguer Law</strong> of radiative transfer:</p>
+<div class="katex-display">$$I_{\text{DNI}} = I_0 \cdot \varepsilon_0 \cdot \exp\left( - m_{\text{air}}(\theta_z) \cdot \tau_{\text{atm}} \right)$$</div>
+<p>where:
+- $I_0 \approx 1361.2 \text{ W/m}^2$ is the extraterrestrial solar constant.
+- $\varepsilon_0 = 1 + 0.033 \cos\left( \frac{2\pi d_n}{365} \right)$ is the Earth orbital eccentricity correction factor on day of year $d_n$.
+- $\theta_z$ is the solar zenith angle, computed from site latitude $\phi$, solar declination $\delta$, and hour angle $\omega$:</p>
+<div class="katex-display">$$\cos \theta_z = \sin \phi \sin \delta + \cos \phi \cos \delta \cos \omega$$</div>
+<ul>
+<li>$m_{\text{air}}(\theta_z)$ is the optical relative air mass, given by the Kasten-Young empirical formula:</li>
+</ul>
+<div class="katex-display">$$m_{\text{air}}(\theta_z) = \frac{1}{\cos \theta_z + 0.50572(96.07995 - \theta_z)^{-1.6364}}$$</div>
+<ul>
+<li>$\tau_{\text{atm}}$ is total atmospheric optical depth, decomposed into four constituent physical extinction mechanisms:</li>
+</ul>
+<div class="katex-display">$$\tau_{\text{atm}} = \tau_{\text{Rayleigh}} + \tau_{\text{Ozone}} + \tau_{\text{WaterVapor}} + \tau_{\text{Aerosol}}$$</div>
+<p>Global Horizontal Irradiance ($GHI$) on photovoltaic modules combines Direct Normal Irradiance ($DNI$) and Diffuse Horizontal Irradiance ($DHI$):</p>
+<div class="katex-display">$$GHI = I_{\text{DNI}} \cos \theta_z + DHI$$</div>
+<div class="callout callout-physics">
+          <div class="callout-title"><span>⚛️</span> <span>Physics Principle & Governing Constraint: Physical Clear-Sky Index Boundary Limit
+The dimensionless clear-sky index $k_t = \frac{GHI}{GHI_{\text{clearsky}}}$ is physically bounded:
+</span></div>
+          
+        </div>
+<div class="katex-display">$$0.0 \le k_t \le 1.25$$</div>
+<blockquote>
+<p>Values of $k_t > 1.0$ occur transiently only during localized cloud-edge scattering ("cloud enhancement" phenomenon).</p>
+</blockquote>
+<hr />
+<h2 id="2-industrial-context-roi">2. Industrial Context &amp; ROI</h2>
+<p>In large-scale solar farms and day-ahead electricity markets:
+- Photovoltaic output intermittency caused by fast-moving cloud banks incurs steep grid imbalance penalties ($18–$45 per MWh).
+- For a 250 MW utility solar asset, a <strong>2.5% improvement in 1-to-4 hour ahead GHI prediction accuracy</strong> reduces spinning reserve dispatch costs and avoid penalty charges, saving <strong>\$1.4M to \$2.1M annually</strong>.
+- Pure black-box neural networks frequently predict unphysical negative night-time irradiance or violate solar zenith angle geometric limits. Coupling physical radiative transfer equations with convolutional cloud motion vectors eliminates impossible predictions.</p>
+<hr />
+<h2 id="3-data-acquisition-synthetic-physics-solver">3. Data Acquisition / Synthetic Physics Solver</h2>
+<p>The synthetic data generator computes diurnal clear-sky and aerosol-attenuated irradiance profiles parameterized by solar zenith angle and aerosol optical depth (AOD):</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">shared_utils.physics_helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">simulate_solar_irradiance_clearsky</span>
+
+<span class="c1"># Solar day profile: 6:00 AM to 6:00 PM (100 timesteps)</span>
+<span class="n">hours</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">6.0</span><span class="p">,</span> <span class="mf">18.0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">zeniths</span> <span class="o">=</span> <span class="mf">90.0</span> <span class="o">-</span> <span class="mf">65.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">((</span><span class="n">hours</span> <span class="o">-</span> <span class="mf">6.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">12.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+
+<span class="c1"># Compute GHI for clean atmosphere vs hazy/plume conditions</span>
+<span class="n">ghi_clean</span> <span class="o">=</span> <span class="n">simulate_solar_irradiance_clearsky</span><span class="p">(</span><span class="n">zeniths</span><span class="p">,</span> <span class="n">aerosol_optical_depth</span><span class="o">=</span><span class="mf">0.06</span><span class="p">)</span>
+<span class="n">ghi_hazy</span> <span class="o">=</span> <span class="n">simulate_solar_irradiance_clearsky</span><span class="p">(</span><span class="n">zeniths</span><span class="p">,</span> <span class="n">aerosol_optical_depth</span><span class="o">=</span><span class="mf">0.35</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Clean Atmosphere Peak GHI: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ghi_clean</span><span class="p">)</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> W/m²&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hazy Atmosphere Peak GHI:  </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ghi_hazy</span><span class="p">)</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> W/m²&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Aerosol Peak Attenuation:  </span><span class="si">{</span><span class="p">(</span><span class="mf">1.0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ghi_hazy</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ghi_clean</span><span class="p">))</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> %&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="4-data-science-physics-ml-workflow">4. Data Science &amp; Physics-ML Workflow</h2>
+<p>We construct a <strong>Physics-Informed Hybrid Irradiance Model</strong>:</p>
+<ol>
+<li><strong>Deterministic Physics Baseline:</strong> We compute the analytical clear-sky profile $GHI_{\text{clearsky}}(t)$ as a baseline prior.</li>
+<li><strong>Feature Engineering:</strong> We provide both astronomical features (zenith $\theta_z$, azimuth $\gamma_s$, extraterrestrial $I_0$) and meteorological sensor features (ambient temperature $T_{\text{amb}}$, relative humidity $RH$, barometric pressure $P$).</li>
+<li><strong>Target Transformation:</strong> Rather than predicting raw irradiance $GHI$, the ML model predicts the normalized clear-sky index:</li>
+</ol>
+<div class="katex-display">$$k_t(t) = \frac{GHI(t)}{GHI_{\text{clearsky}}(t)}$$</div>
+<p>The final prediction is obtained by multiplying back:</p>
+<div class="katex-display">$$\widehat{GHI}(t) = \max\left(0, \widehat{k}_t(t) \cdot GHI_{\text{clearsky}}(t)\right)$$</div>
+<p>This guarantees that predicted night-time irradiance is identically zero and preserves thermodynamic envelope bounds.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">GradientBoostingRegressor</span>
+
+<span class="c1"># Synthetic dataset with cloud intermittency</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">cloud_cover</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">hours</span><span class="p">))</span>
+<span class="n">ghi_observed</span> <span class="o">=</span> <span class="n">ghi_clean</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="mf">0.7</span> <span class="o">*</span> <span class="n">cloud_cover</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">hours</span><span class="p">))</span>
+<span class="n">ghi_observed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ghi_observed</span><span class="p">)</span>
+
+<span class="c1"># Compute clear-sky index target</span>
+<span class="n">kt_target</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ghi_clean</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">,</span> <span class="n">ghi_observed</span> <span class="o">/</span> <span class="n">ghi_clean</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+
+<span class="c1"># Train hybrid model</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">zeniths</span><span class="p">,</span> <span class="n">cloud_cover</span><span class="p">])</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features</span><span class="p">[:</span><span class="mi">80</span><span class="p">],</span> <span class="n">kt_target</span><span class="p">[:</span><span class="mi">80</span><span class="p">])</span>
+
+<span class="c1"># Reconstruct physical irradiance</span>
+<span class="n">kt_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="mi">80</span><span class="p">:])</span>
+<span class="n">ghi_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">kt_pred</span> <span class="o">*</span> <span class="n">ghi_clean</span><span class="p">[</span><span class="mi">80</span><span class="p">:])</span>
+<span class="n">mae</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">ghi_pred</span> <span class="o">-</span> <span class="n">ghi_observed</span><span class="p">[</span><span class="mi">80</span><span class="p">:]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hybrid GHI Prediction Test MAE: </span><span class="si">{</span><span class="n">mae</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> W/m²&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<h2 id="5-interactive-visualization-diagnostics">5. Interactive Visualization &amp; Diagnostics</h2>
+<p>The diagnostic plot shows the diurnal solar irradiance curves, comparing pristine clear-sky conditions with elevated aerosol and smog optical depth attenuation.</p>
+<div class="figure-container">
+  <div class="figure-plot-area">
+    <img src="../assets/figures/05_solar_irradiance_clearsky.png" alt="Diurnal Solar Irradiance Attenuation" style="width:100%; border-radius:6px;">
+  </div>
+  <div class="figure-caption">
+    <strong>Figure 5.1:</strong> Diurnal Global Horizontal Irradiance (GHI) across clean vs. aerosol-polluted atmospheres following Beer-Lambert radiative decay.
+  </div>
+</div>
+
+<p>Inspect the interactive diurnal profile below to track solar irradiance values across hours of the day:</p>
+<div class="figure-container">
+  <div class="figure-plot-area">
+    <iframe src="../assets/figures/05_solar_interactive.html" style="width:100%; height:420px; border:none;"></iframe>
+  </div>
+  <div class="figure-caption">
+    <strong>Interactive Figure 5.2:</strong> Interactive diurnal irradiance profile. Hover over time markers to inspect exact solar flux levels.
+  </div>
+</div>
+
+<hr />
+<h2 id="6-production-deployment-notes">6. Production Deployment Notes</h2>
+<ul>
+<li><strong>Input Stream:</strong> Geostationary satellite imagery (GOES-16 / Meteosat-11 visible channels) + on-site pyranometer telemetry ingested every <strong>5 minutes</strong>.</li>
+<li><strong>Edge Deployment:</strong> Deployed as an ONNX model on plant-level edge computers with inference latency <strong>&lt; 8 ms</strong>.</li>
+<li><strong>Energy Trading Hook:</strong> Predictions feed directly into automated bid dispatch algorithms in ERCOT and CAISO markets, reducing day-ahead schedule deviations.</li>
+</ul>
+        </div>
+
+        <!-- Bottom Chapter Pagination -->
+        <div class="chapter-nav-cards">
+          
+          <a href="../chapters/04_nuclear_core_temp.html" class="chapter-nav-card prev">
+            <span class="chapter-nav-label">&larr; Previous Capstone</span>
+            <span class="chapter-nav-title">04: Nuclear Core Heat PINN</span>
+          </a>
+          
+
+          
+          <a href="../chapters/06_pipeline_leak.html" class="chapter-nav-card next">
+            <span class="chapter-nav-label">Next Capstone &rarr;</span>
+            <span class="chapter-nav-title">06: Pipeline Acoustic Leak Detection</span>
+          </a>
+          
+        </div>
+      </article>
+
+      <!-- 3. Right Sidebar ("On This Page" Section Anchor Tracker) -->
+      <aside class="right-toc">
+        <div class="right-toc-title">On This Page</div>
+        <ul class="right-toc-links">
+          <li><a href="#1-the-physical-principle" class="right-toc-link">1. Physical Principle</a></li>
+          <li><a href="#2-industrial-context-roi" class="right-toc-link">2. Industrial ROI</a></li>
+          <li><a href="#3-data-acquisition-synthetic-physics-solver" class="right-toc-link">3. Synthetic Solver</a></li>
+          <li><a href="#4-data-science-physics-ml-workflow" class="right-toc-link">4. Physics-ML Workflow</a></li>
+          <li><a href="#5-interactive-visualization-diagnostics" class="right-toc-link">5. Diagnostics & Viz</a></li>
+          <li><a href="#6-production-deployment-notes" class="right-toc-link">6. Deployment Notes</a></li>
+        </ul>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Search Modal Backdrop & Dialog -->
+  <div class="search-modal-backdrop" id="search-modal-backdrop">
+    <div class="search-modal">
+      <div class="search-modal-header">
+        <span style="font-size: 1.1rem; color: var(--text-muted);">🔍</span>
+        <input type="text" class="search-modal-input" id="search-modal-input" placeholder="Search physics equations, models, or industries..." autocomplete="off">
+        <button style="background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--text-muted);" onclick="document.getElementById('search-modal-backdrop').classList.remove('open')">&times;</button>
+      </div>
+      <div class="search-modal-results" id="search-modal-results"></div>
+    </div>
+  </div>
+
+  <script src="../assets/main.js"></script>
+  <script src="../assets/search.js"></script>
+</body>
+</html>

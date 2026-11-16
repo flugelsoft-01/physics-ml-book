@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cross-Disciplinary Physics-ML Glossary | Data Science & Machine Learning for Physics</title>
+
+  <!-- Favicon & App Icons -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../assets/site.webmanifest">
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- Primary SEO Meta Tags -->
+  <meta name="title" content="Cross-Disciplinary Physics-ML Glossary | Data Science & Machine Learning for Physics">
+  <meta name="description" content="120+ Definitive Terms Across Continuum Mechanics, Statistical Physics, and Deep Learning - Capstone Project in Foundations & Reference covering governing physical equations, synthetic solvers, and PINN architectures.">
+  <meta name="keywords" content="Glossary, Continuum Mechanics, Navier-Stokes, Ising, Autograd, Collocation, Physics-Informed Neural Networks, PINN, Scientific Machine Learning, SciML, Differential Equations">
+  <meta name="author" content="Data Science & ML for Physics Authors">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://physics-ml-book.org/chapters/glossary.html">
+
+  <!-- GEO & Regional Metadata -->
+  <meta name="geo.region" content="US-CA">
+  <meta name="geo.placename" content="San Francisco, California">
+  <meta name="geo.position" content="37.7749;-122.4194">
+  <meta name="ICBM" content="37.7749, -122.4194">
+  <meta name="DC.title" content="Cross-Disciplinary Physics-ML Glossary">
+  <meta name="DC.subject" content="Physics-Informed Machine Learning, Computational Engineering">
+  <meta name="DC.coverage" content="World">
+
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Data Science & Machine Learning for Physics: 30 Capstone Projects Across Industries">
+  <meta property="og:title" content="Cross-Disciplinary Physics-ML Glossary">
+  <meta property="og:description" content="120+ Definitive Terms Across Continuum Mechanics, Statistical Physics, and Deep Learning">
+  <meta property="og:url" content="https://physics-ml-book.org/chapters/glossary.html">
+  <meta property="og:image" content="https://physics-ml-book.org/assets/apple-touch-icon.png">
+  <meta property="og:image:alt" content="Physics-ML Icon">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="en_GB">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cross-Disciplinary Physics-ML Glossary">
+  <meta name="twitter:description" content="120+ Definitive Terms Across Continuum Mechanics, Statistical Physics, and Deep Learning">
+  <meta name="twitter:image" content="https://physics-ml-book.org/assets/apple-touch-icon.png">
+
+  <!-- JSON-LD Structured Data Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Cross-Disciplinary Physics-ML Glossary",
+    "description": "120+ Definitive Terms Across Continuum Mechanics, Statistical Physics, and Deep Learning",
+    "articleSection": "Foundations & Reference",
+    "keywords": "Glossary, Continuum Mechanics, Navier-Stokes, Ising, Autograd, Collocation",
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "isPartOf": {
+      "@type": "Book",
+      "name": "Data Science & Machine Learning for Physics: 30 Capstone Projects Across Industries",
+      "url": "https://physics-ml-book.org"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Physics-ML Technical Monograph Publishing"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="../assets/style.css">
+  
+  <!-- KaTeX for ultra-fast LaTeX math rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ],
+      throwOnError: false
+    });"></script>
+
+  <!-- Plotly.js for interactive physics diagnostics -->
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+</head>
+<body data-basepath="../">
+
+  <!-- Mobile Top Navigation Bar -->
+  <div class="mobile-topbar">
+    <button class="mobile-menu-btn" aria-label="Toggle Navigation">☰</button>
+    <a href="../index.html" class="book-title-badge">
+      <span class="book-icon">⚛</span>
+      <span class="book-title-text">Physics-ML Book</span>
+    </a>
+    <button class="search-box-btn trigger-search-btn" style="width: auto; padding: 6px 10px;">🔍</button>
+  </div>
+
+  <div class="app-wrapper">
+    <!-- 1. Left Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="book-title-badge">
+          <div class="book-icon">⚛</div>
+          <div class="book-title-text">DS & ML for Physics<br><small style="font-weight: 400; color: var(--text-muted); font-size: 0.75rem;">30 Capstone Projects</small></div>
+        </a>
+        <button class="search-box-btn trigger-search-btn">
+          <span>🔍 Quick search...</span>
+          <span class="search-shortcut">/</span>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Foundations & Reference</span>
+            <span class="toc-badge">Guides</span>
+          </div>
+          
+          <a href="../chapters/foundations.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Paradigms of Physics-ML</span>
+          </a>
+          
+          <a href="../chapters/notation.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Notation & Dimensionless Numbers</span>
+          </a>
+          
+          <a href="../chapters/benchmarks.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Industrial ROI Benchmarks</span>
+          </a>
+          
+          <a href="../chapters/datasets.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Open Datasets Catalog</span>
+          </a>
+          
+          <a href="../chapters/glossary.html" class="toc-item active">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Physics-ML Glossary</span>
+          </a>
+          
+          <a href="../chapters/playground.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Live Interactive Sandbox</span>
+          </a>
+          
+        </div>
+        
+
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 1: Energy & Power Systems</span>
+            <span class="toc-badge">Projects 01–06</span>
+          </div>
+          
+          <a href="../chapters/01_wind_wake.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Wind Turbine Wake Modeling</span>
+          </a>
+          
+          <a href="../chapters/02_smart_grid_load.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Smart-Grid Load Dynamics</span>
+          </a>
+          
+          <a href="../chapters/03_battery_degradation.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Battery EIS & Degradation</span>
+          </a>
+          
+          <a href="../chapters/04_nuclear_core_temp.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Nuclear Core Heat PINN</span>
+          </a>
+          
+          <a href="../chapters/05_solar_irradiance.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Solar Irradiance Forecasting</span>
+          </a>
+          
+          <a href="../chapters/06_pipeline_leak.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Pipeline Acoustic Leak Detection</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 2: Aerospace, Defense & Automotive</span>
+            <span class="toc-badge">Projects 07–12</span>
+          </div>
+          
+          <a href="../chapters/07_supersonic_airfoil.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Supersonic Airfoil Optimization</span>
+          </a>
+          
+          <a href="../chapters/08_orbital_debris.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Orbital Debris Collision Avoidance</span>
+          </a>
+          
+          <a href="../chapters/09_lidar_radar_fusion.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Autonomous LiDAR-Radar Fusion</span>
+          </a>
+          
+          <a href="../chapters/10_turbine_vibration.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Jet Engine Vibration Anomaly</span>
+          </a>
+          
+          <a href="../chapters/11_ballistic_monte_carlo.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Ballistic Wind-Drift Trajectory</span>
+          </a>
+          
+          <a href="../chapters/12_crash_mesh_deform.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Crash-Test Mesh Deformation</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 3: Semiconductors, Manufacturing & Materials</span>
+            <span class="toc-badge">Projects 13–18</span>
+          </div>
+          
+          <a href="../chapters/13_crystal_dft_surrogate.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Crystal DFT Surrogate</span>
+          </a>
+          
+          <a href="../chapters/14_wafer_defect_cv.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Wafer Photolithography Defect CV</span>
+          </a>
+          
+          <a href="../chapters/15_microchip_thermal.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">3D Microchip Thermal Dissipation</span>
+          </a>
+          
+          <a href="../chapters/16_superconductor_tc.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Superconductor Tc Discovery</span>
+          </a>
+          
+          <a href="../chapters/17_melt_pool_instability.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Laser Melt-Pool Instability</span>
+          </a>
+          
+          <a href="../chapters/18_cyclic_fatigue_life.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Cyclic Fatigue Crack Life</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 4: Earth Sciences, Climate & Infrastructure</span>
+            <span class="toc-badge">Projects 19–24</span>
+          </div>
+          
+          <a href="../chapters/19_earthquake_triangulation.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Seismic Wave Triangulation</span>
+          </a>
+          
+          <a href="../chapters/20_flood_inundation.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Urban Flood Inundation</span>
+          </a>
+          
+          <a href="../chapters/21_ocean_microplastics.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Ocean Microplastic Tracking</span>
+          </a>
+          
+          <a href="../chapters/22_building_seismic_damping.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Building Seismic Resonance</span>
+          </a>
+          
+          <a href="../chapters/23_atmospheric_carbon.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Atmospheric Carbon Plume</span>
+          </a>
+          
+          <a href="../chapters/24_glacier_mass_balance.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Glacier Creep & Mass Balance</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 5: Finance, Healthcare & Complex Systems</span>
+            <span class="toc-badge">Projects 25–30</span>
+          </div>
+          
+          <a href="../chapters/25_market_volatility_ising.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Market Volatility Ising Models</span>
+          </a>
+          
+          <a href="../chapters/26_aneurysm_blood_flow.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Cerebral Aneurysm Hemodynamics</span>
+          </a>
+          
+          <a href="../chapters/27_accelerated_mri_cs.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Accelerated MRI Compressed Sensing</span>
+          </a>
+          
+          <a href="../chapters/28_hft_queue_mechanics.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Order Book Queue Mechanics</span>
+          </a>
+          
+          <a href="../chapters/29_corneal_wavefront.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Corneal Optical Wavefront</span>
+          </a>
+          
+          <a href="../chapters/30_traffic_phase_lwr.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Highway Traffic Phase Transitions</span>
+          </a>
+          
+        </div>
+        
+      </nav>
+
+      <div class="sidebar-footer">
+        <span>v1.0 &bull; 2026 Edition</span>
+        <button class="theme-toggle-btn" aria-label="Toggle dark/light mode">
+          <span class="theme-mode-text">☀️ Light</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- 2. Main Content Center Pane -->
+    <main class="main-wrapper">
+      <article class="content-container">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+          <a href="../index.html">Home</a>
+          <span>&rsaquo;</span>
+          <span>Foundations & Reference</span>
+          <span>&rsaquo;</span>
+          <span style="color: var(--text-primary); font-weight: 500;">
+            Physics-ML Glossary
+          </span>
+        </div>
+
+        <!-- Chapter Header Badge -->
+        <div class="chapter-meta-badge">
+          <span>🏷️ Physics & Computer Science Lexicon</span>
+          <span>&bull;</span>
+          <span>⚙️ Reference</span>
+          <span>&bull;</span>
+          <span>⏱️ 25 min read</span>
+        </div>
+
+        <h1>Cross-Disciplinary Physics-ML Glossary</h1>
+        <div class="chapter-subtitle">120+ Definitive Terms Across Continuum Mechanics, Statistical Physics, and Deep Learning</div>
+
+        <!-- Rendered Chapter Body -->
+        <div class="chapter-body">
+          <p>An authoritative reference defining key terminology bridging classical continuum mechanics, theoretical physics, dynamic systems, and modern deep learning.</p>
+<hr />
+<h3 id="a">A</h3>
+<ul>
+<li><strong>Actuator Disk Model:</strong> An analytical aerodynamic representation of a wind turbine or propeller rotor replacing individual blades with a permeable disk that exerts an axial thrust force deficit on passing fluid.</li>
+<li><strong>Advection:</strong> The transport of a physical substance, scalar quantity, or conserved fluid property solely due to the bulk velocity field of the carrying fluid ($(\mathbf{u} \cdot \nabla)\phi$).</li>
+<li><strong>Arrhenius Equation:</strong> An exponential formula modeling the temperature dependence of chemical reaction and thermal degradation rates: $k(T) = A \exp(-E_a / RT)$.</li>
+<li><strong>Automatic Differentiation (Autograd):</strong> A chain-rule graph execution technique that computes exact mathematical derivatives of arbitrary computational functions up to machine precision without numerical finite-difference discretization artifacts.</li>
+</ul>
+<h3 id="b">B</h3>
+<ul>
+<li><strong>BCS Theory (Bardeen-Cooper-Schrieffer):</strong> The microscopic theory of superconductivity explaining zero electrical resistance below critical temperature $T_c$ via phonon-mediated electron pairing into Cooper pairs.</li>
+<li><strong>Beer-Lambert-Bouguer Law:</strong> The exponential attenuation of radiant electromagnetic flux propagating through an absorbing or scattering medium: $I = I_0 \exp(-\tau \cdot m)$.</li>
+<li><strong>Betz Limit:</strong> The theoretical upper bound stating that no horizontal-axis wind turbine can capture more than $16/27 \approx 59.3\%$ of the kinetic energy in oncoming wind.</li>
+<li><strong>Buckingham $\pi$ Theorem:</strong> A fundamental dimensional analysis theorem stating that a physically invariant relationship among $n$ variables with $k$ physical dimensions can be reformulated as a function of $n - k$ dimensionless parameters.</li>
+</ul>
+<h3 id="c">C</h3>
+<ul>
+<li><strong>Collocation Points:</strong> Unlabeled spatial and temporal coordinates $(\mathbf{x}_i, t_i)$ distributed across a domain interior where neural network outputs are differentiated to evaluate differential equation residual losses.</li>
+<li><strong>Continuity Equation:</strong> The mathematical statement of conservation of mass in a continuum: $\frac{\partial \rho}{\partial t} + \nabla \cdot (\rho \mathbf{u}) = 0$.</li>
+<li><strong>Coriolis Force:</strong> An apparent inertial force in a rotating planetary reference frame acting perpendicular to the velocity vector: $\mathbf{a}_{\text{Coriolis}} = -2(\boldsymbol{\Omega} \times \mathbf{v})$.</li>
+<li><strong>Courant-Friedrichs-Lewy (CFL) Condition:</strong> A necessary numerical stability constraint for explicit hyperbolic PDE integration requiring that numerical domain of dependence covers the physical domain: $CFL = \frac{v \Delta t}{\Delta x} \le 1.0$.</li>
+</ul>
+<h3 id="d">D</h3>
+<ul>
+<li><strong>DeepONet (Deep Operator Network):</strong> A dual-network architecture (Branch and Trunk) learning non-linear operators mapping continuous function spaces to continuous function outputs based on the universal operator approximation theorem.</li>
+<li><strong>Departure from Nucleate Boiling (DNB):</strong> The critical thermal threshold in a liquid-cooled nuclear reactor core where vapor bubbles form an insulating film over fuel rods, drastically reducing convective heat transfer and risking clad meltdown.</li>
+<li><strong>Deviatoric Stress Tensor:</strong> The trace-free component of the stress tensor ($\mathbf{s} = \boldsymbol{\sigma} - \frac{1}{3}\text{Tr}(\boldsymbol{\sigma})\mathbf{I}$) responsible for shearing and plastic shape distortion without changing volume.</li>
+</ul>
+<h3 id="e">E</h3>
+<ul>
+<li><strong>Eikonal Equation:</strong> The high-frequency geometric optics and acoustics approximation of the wave equation describing the spatial propagation of travel-time wavefronts: $|\nabla T(\mathbf{x})|^2 = 1 / v(\mathbf{x})^2$.</li>
+<li><strong>Electrochemical Impedance Spectroscopy (EIS):</strong> An analytical diagnostic measuring complex frequency-dependent electrical impedance $Z(\omega)$ by applying a small sinusoidal voltage perturbation across a battery or fuel cell.</li>
+<li><strong>Equivariance:</strong> A structural property of an operator where applying a spatial transformation (e.g. rotation $\mathbf{R} \in SO(3)$) to input features results in an identically transformed output: $\mathbf{f}(\mathbf{R}\mathbf{x}) = \mathbf{R}\mathbf{f}(\mathbf{x})$.</li>
+<li><strong>Euler Equations:</strong> The non-linear hyperbolic conservation laws governing inviscid, non-heat-conducting compressible fluid dynamics.</li>
+</ul>
+<h3 id="f">F</h3>
+<ul>
+<li><strong>Fast Fourier Transform (FFT):</strong> An algorithm computing the Discrete Fourier Transform of an $N$-element sequence in $\mathcal{O}(N \log N)$ complexity, transforming spatial/temporal signals into frequency-domain spectra.</li>
+<li><strong>Fokker-Planck Equation:</strong> A partial differential equation describing the time evolution of the continuous probability density function of particles subject to deterministic drag drift and stochastic Brownian diffusion forces.</li>
+<li><strong>Fourier Neural Operator (FNO):</strong> A deep learning operator architecture that parameterizes integral kernel operators directly in Fourier frequency space via FFT and inverse FFT layers.</li>
+</ul>
+<h3 id="g">G</h3>
+<ul>
+<li><strong>Galilean Invariance:</strong> The physical principle stating that the fundamental laws of motion are identical in all non-accelerating inertial reference frames.</li>
+<li><strong>Glen's Flow Law:</strong> The constitutive empirical equation describing glacial ice deformation as a non-Newtonian power-law fluid: $\dot{\varepsilon} = A \tau^n$, with typical exponent $n \approx 3$.</li>
+<li><strong>Greenshields Model:</strong> An empirical macroscopic traffic flow formulation assuming a linear decline in vehicular speed with increasing vehicular density: $v(\rho) = v_{\text{free}}(1 - \rho / \rho_{\text{jam}})$.</li>
+</ul>
+<h3 id="h">H</h3>
+<ul>
+<li><strong>Hamiltonian Mechanics:</strong> A reformulation of classical mechanics where the state of a physical system is expressed in canonical position $\mathbf{q}$ and momentum $\mathbf{p}$ phase space coordinates, with total energy $\mathcal{H}(\mathbf{q}, \mathbf{p})$ conserved.</li>
+<li><strong>Harmonic Oscillator:</strong> A dynamical system that, when displaced from equilibrium, experiences a restoring force proportional to displacement: $m \ddot{x} + c \dot{x} + k x = 0$.</li>
+<li><strong>Hopkins Diffraction Model:</strong> The standard optical formulation calculating aerial image light intensity formed by partially coherent illumination through a photolithography mask.</li>
+</ul>
+<h3 id="i">I</h3>
+<ul>
+<li><strong>Inductive Bias:</strong> The set of structural assumptions, physical symmetries, or conservation constraints encoded directly into a machine learning model architecture to prioritize plausible physical hypotheses.</li>
+<li><strong>Ising Model:</strong> A mathematical model in statistical mechanics describing ferromagnetic phase transitions via a lattice of interacting discrete magnetic dipole spins $s_i \in \{+1, -1\}$.</li>
+</ul>
+<h3 id="j">J</h3>
+<ul>
+<li><strong>Joukowsky Equation:</strong> The fundamental acoustic wave equation calculating the maximum instantaneous transient pressure rise resulting from an abrupt liquid valve shutdown: $\Delta P_{\text{max}} = \rho \cdot a \cdot \Delta v$.</li>
+</ul>
+<h3 id="k">K</h3>
+<ul>
+<li><strong>$k$-Space:</strong> The spatial frequency 2D/3D Fourier domain where raw Magnetic Resonance Imaging (MRI) gradient echo signals are collected prior to inverse Fourier reconstruction.</li>
+<li><strong>Kohn-Sham Equations:</strong> The single-particle Schrödinger-like differential equations whose ground-state solutions yield the exact electronic charge density and energy of a many-body quantum atomic system.</li>
+</ul>
+<h3 id="l">L</h3>
+<ul>
+<li><strong>Lagrangian Particle Tracking:</strong> A fluid mechanics tracking framework following the individual discrete trajectories of particles or pollutants moving within a continuum velocity field: $\frac{d\mathbf{x}_p}{dt} = \mathbf{u}(\mathbf{x}_p, t)$.</li>
+<li><strong>Lighthill-Whitham-Richards (LWR) Model:</strong> The fundamental macroscopic first-order kinematic wave PDE modeling traffic flow density conservation: $\frac{\partial \rho}{\partial t} + \frac{\partial (\rho v)}{\partial x} = 0$.</li>
+</ul>
+<h3 id="m">M</h3>
+<ul>
+<li><strong>Marangoni Effect:</strong> Thermocapillary fluid convection driven by spatial gradients in surface tension along a liquid-gas or liquid-liquid interface: $\tau = \frac{d\gamma}{dT} \nabla_s T$.</li>
+<li><strong>Master Equation:</strong> A set of coupled differential equations describing the time-dependent probability distributions of discrete states undergoing stochastic transition jump rates.</li>
+<li><strong>Munnerlyn Formula:</strong> The geometric equation calculating corneal tissue ablation depth required to reshape refractive optical curvature during laser eye surgery.</li>
+</ul>
+<h3 id="n">N</h3>
+<ul>
+<li><strong>Navier-Stokes Equations:</strong> The non-linear partial differential equations describing the conservation of linear momentum and mass for viscous Newtonian fluids.</li>
+<li><strong>Nyquist Plot:</strong> A complex frequency-response locus plotting negative imaginary impedance $-Z''(\omega)$ against real impedance $Z'(\omega)$ across alternating excitation frequencies.</li>
+</ul>
+<h3 id="p">P</h3>
+<ul>
+<li><strong>Paris-Erdogan Law:</strong> The power-law fracture mechanics relationship relating cyclic mechanical fatigue crack growth rate to stress intensity factor range: $\frac{da}{dN} = C (\Delta K)^m$.</li>
+<li><strong>Physics-Informed Neural Network (PINN):</strong> A neural network trained by minimizing a multi-objective loss combining measured sensor data with differential equation residuals evaluated via automatic differentiation.</li>
+<li><strong>Prandtl-Meyer Expansion:</strong> A continuous, isentropic expansion fan centered at a convex corner in supersonic flow that lowers static pressure and accelerates Mach number.</li>
+</ul>
+<h3 id="r">R</h3>
+<ul>
+<li><strong>Randles Circuit:</strong> An equivalent electrical circuit modeling battery electrochemical cells using an electrolyte resistance, double-layer capacitance, charge-transfer resistance, and Warburg diffusion impedance.</li>
+<li><strong>Rankine-Hugoniot Conditions:</strong> The mathematical relations derived from conservation laws describing the discontinuous jump in pressure, density, and velocity across a physical shockwave front.</li>
+<li><strong>Robin Boundary Condition:</strong> A mixed boundary constraint specifying a linear combination of a field variable and its normal spatial derivative: $a u + b \frac{\partial u}{\partial n} = g$.</li>
+<li><strong>Rosenthal Solution:</strong> The analytical 3D thermal conduction solution for a moving point heat source traversing a semi-infinite solid, widely applied in welding and laser 3D printing.</li>
+</ul>
+<h3 id="s">S</h3>
+<ul>
+<li><strong>Saint-Venant Equations:</strong> The 2D hyperbolic shallow water equations derived from depth-integrating Navier-Stokes under the assumption that vertical scale is negligible relative to horizontal scale.</li>
+<li><strong>Solid Electrolyte Interphase (SEI):</strong> A passivation layer that forms on the graphite anode surface of a lithium-ion battery due to electrolyte decomposition; its continual parabolic thickening is the primary driver of capacity fade.</li>
+<li><strong>Spectral Bias:</strong> The mathematical tendency of gradient-based neural networks to fit smooth, low-frequency functions rapidly while taking disproportionately long to learn high-frequency physical oscillations.</li>
+<li><strong>Swing Equation:</strong> The non-linear second-order differential equation describing the rotational electromechanical dynamics of a synchronous power generator relative to grid reference frequency: $M \ddot{\delta} + D \dot{\delta} = P_m - P_e$.</li>
+</ul>
+<h3 id="t">T</h3>
+<ul>
+<li><strong>Tuned Mass Damper (TMD):</strong> A passive or active secondary vibrating mass mounted inside tall structures or bridges tuned to the structure's primary natural resonance frequency to dissipate seismic or aerodynamic wind vibrations.</li>
+</ul>
+<h3 id="v">V</h3>
+<ul>
+<li><strong>von Mises Stress:</strong> An equivalent scalar stress criterion based on the second deviatoric stress invariant ($J_2$) predicting whether a ductile metallic material will undergo irreversible plastic yield.</li>
+</ul>
+<h3 id="w">W</h3>
+<ul>
+<li><strong>Warburg Impedance:</strong> An electrical impedance element with constant $45^\circ$ phase angle modeling semi-infinite linear diffusion of ions through solid-state electrodes in electrochemistry: $Z_W = \frac{\sigma}{\sqrt{\omega}}(1 - j)$.</li>
+<li><strong>Water-Hammer:</strong> A destructive pressure surge or acoustic shockwave caused when a fluid in motion is abruptly forced to stop or change direction inside a closed pipeline.</li>
+<li><strong>Womersley Number ($\alpha$):</strong> A dimensionless parameter in biofluid mechanics expressing the ratio of transient pulsatile inertial forces to viscous diffusion forces in blood flow: $\alpha = R \sqrt{\frac{\omega}{\nu}}$.</li>
+</ul>
+<h3 id="z">Z</h3>
+<ul>
+<li><strong>Zernike Polynomials:</strong> A sequence of orthogonal polynomials defined on the unit circular disk widely used in optical engineering to decompose and quantify wavefront aberrations in the human cornea and telescope lenses.</li>
+</ul>
+        </div>
+
+        <!-- Bottom Chapter Pagination -->
+        <div class="chapter-nav-cards">
+          
+          <a href="../chapters/datasets.html" class="chapter-nav-card prev">
+            <span class="chapter-nav-label">&larr; Previous Capstone</span>
+            <span class="chapter-nav-title">: Open Datasets Catalog</span>
+          </a>
+          
+
+          
+          <a href="../chapters/playground.html" class="chapter-nav-card next">
+            <span class="chapter-nav-label">Next Capstone &rarr;</span>
+            <span class="chapter-nav-title">: Live Interactive Sandbox</span>
+          </a>
+          
+        </div>
+      </article>
+
+      <!-- 3. Right Sidebar ("On This Page" Section Anchor Tracker) -->
+      <aside class="right-toc">
+        <div class="right-toc-title">On This Page</div>
+        <ul class="right-toc-links">
+          <li><a href="#1-the-physical-principle" class="right-toc-link">1. Physical Principle</a></li>
+          <li><a href="#2-industrial-context-roi" class="right-toc-link">2. Industrial ROI</a></li>
+          <li><a href="#3-data-acquisition-synthetic-physics-solver" class="right-toc-link">3. Synthetic Solver</a></li>
+          <li><a href="#4-data-science-physics-ml-workflow" class="right-toc-link">4. Physics-ML Workflow</a></li>
+          <li><a href="#5-interactive-visualization-diagnostics" class="right-toc-link">5. Diagnostics & Viz</a></li>
+          <li><a href="#6-production-deployment-notes" class="right-toc-link">6. Deployment Notes</a></li>
+        </ul>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Search Modal Backdrop & Dialog -->
+  <div class="search-modal-backdrop" id="search-modal-backdrop">
+    <div class="search-modal">
+      <div class="search-modal-header">
+        <span style="font-size: 1.1rem; color: var(--text-muted);">🔍</span>
+        <input type="text" class="search-modal-input" id="search-modal-input" placeholder="Search physics equations, models, or industries..." autocomplete="off">
+        <button style="background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--text-muted);" onclick="document.getElementById('search-modal-backdrop').classList.remove('open')">&times;</button>
+      </div>
+      <div class="search-modal-results" id="search-modal-results"></div>
+    </div>
+  </div>
+
+  <script src="../assets/main.js"></script>
+  <script src="../assets/search.js"></script>
+</body>
+</html>

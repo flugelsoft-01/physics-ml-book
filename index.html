@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Science & Machine Learning for Physics: 30 Capstone Projects Across Industries</title>
+
+  <!-- Favicon & App Icons -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="assets/apple-touch-icon.png">
+  <link rel="manifest" href="assets/site.webmanifest">
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- Primary SEO Meta Tags -->
+  <meta name="title" content="Data Science & Machine Learning for Physics: 30 Capstone Projects Across Industries">
+  <meta name="description" content="A self-contained static monograph bridging Navier-Stokes, Maxwell, and Poisson equations with Physics-Informed Neural Networks (PINNs), Fourier Neural Operators, and real-time industrial telemetry.">
+  <meta name="keywords" content="Physics-Informed Machine Learning, PINN, Scientific Machine Learning, SciML, Differential Equations, Navier Stokes, Fourier Neural Operator, DeepONet, Computational Physics">
+  <meta name="author" content="Data Science & ML for Physics Authors">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://physics-ml-book.org/index.html">
+
+  <!-- GEO & Regional Metadata -->
+  <meta name="geo.region" content="US-CA">
+  <meta name="geo.placename" content="San Francisco, California">
+  <meta name="geo.position" content="37.7749;-122.4194">
+  <meta name="ICBM" content="37.7749, -122.4194">
+  <meta name="DC.title" content="Data Science & Machine Learning for Physics">
+  <meta name="DC.subject" content="Physics-Informed Machine Learning, Computational Engineering">
+  <meta name="DC.coverage" content="World">
+
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="book">
+  <meta property="og:site_name" content="Data Science & Machine Learning for Physics">
+  <meta property="og:title" content="Data Science & Machine Learning for Physics: 30 Capstone Projects Across Industries">
+  <meta property="og:description" content="30 industrial capstone projects bridging classical physics and deep learning across energy, aerospace, manufacturing, earth sciences, and healthcare.">
+  <meta property="og:url" content="https://physics-ml-book.org/index.html">
+  <meta property="og:image" content="https://physics-ml-book.org/assets/apple-touch-icon.png">
+  <meta property="og:image:alt" content="Physics-ML Monograph Icon">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="en_GB">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Science & Machine Learning for Physics: 30 Capstone Projects">
+  <meta name="twitter:description" content="Bridging Navier-Stokes, Maxwell, and Poisson PDEs with PINNs and Neural Operators across 30 industrial domains.">
+  <meta name="twitter:image" content="https://physics-ml-book.org/assets/apple-touch-icon.png">
+
+  <!-- JSON-LD Structured Data Schema for Book -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    "name": "Data Science & Machine Learning for Physics: 30 Capstone Projects Across Industries",
+    "url": "https://physics-ml-book.org",
+    "description": "A comprehensive code-first static monograph exploring physics-informed machine learning, PINNs, and neural operators across 30 industrial engineering domains.",
+    "numberOfPages": 36,
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "genre": ["Computational Physics", "Machine Learning", "Applied Mathematics"],
+    "publisher": {
+      "@type": "Organization",
+      "name": "Physics-ML Technical Monograph Publishing"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="assets/style.css">
+  
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ],
+      throwOnError: false
+    });"></script>
+</head>
+<body data-basepath="./">
+
+  <!-- Mobile Top Navigation Bar -->
+  <div class="mobile-topbar">
+    <button class="mobile-menu-btn" aria-label="Toggle Navigation">☰</button>
+    <a href="index.html" class="book-title-badge">
+      <span class="book-icon">⚛</span>
+      <span class="book-title-text">Physics-ML Book</span>
+    </a>
+    <button class="search-box-btn trigger-search-btn" style="width: auto; padding: 6px 10px;">🔍</button>
+  </div>
+
+  <div class="app-wrapper">
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="book-title-badge">
+          <div class="book-icon">⚛</div>
+          <div class="book-title-text">DS & ML for Physics<br><small style="font-weight: 400; color: var(--text-muted); font-size: 0.75rem;">30 Capstone Projects</small></div>
+        </a>
+        <button class="search-box-btn trigger-search-btn">
+          <span>🔍 Quick search...</span>
+          <span class="search-shortcut">/</span>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Foundations & Reference</span>
+            <span class="toc-badge">Guides</span>
+          </div>
+          
+          <a href="chapters/foundations.html" class="toc-item">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Paradigms of Physics-ML</span>
+          </a>
+          
+          <a href="chapters/notation.html" class="toc-item">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Notation & Dimensionless Numbers</span>
+          </a>
+          
+          <a href="chapters/benchmarks.html" class="toc-item">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Industrial ROI Benchmarks</span>
+          </a>
+          
+          <a href="chapters/datasets.html" class="toc-item">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Open Datasets Catalog</span>
+          </a>
+          
+          <a href="chapters/glossary.html" class="toc-item">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Physics-ML Glossary</span>
+          </a>
+          
+          <a href="chapters/playground.html" class="toc-item">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Live Interactive Sandbox</span>
+          </a>
+          
+        </div>
+        
+
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 1: Energy & Power Systems</span>
+            <span class="toc-badge">Projects 01–06</span>
+          </div>
+          
+          <a href="chapters/01_wind_wake.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Wind Turbine Wake Modeling</span>
+          </a>
+          
+          <a href="chapters/02_smart_grid_load.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Smart-Grid Load Dynamics</span>
+          </a>
+          
+          <a href="chapters/03_battery_degradation.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Battery EIS & Degradation</span>
+          </a>
+          
+          <a href="chapters/04_nuclear_core_temp.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Nuclear Core Heat PINN</span>
+          </a>
+          
+          <a href="chapters/05_solar_irradiance.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Solar Irradiance Forecasting</span>
+          </a>
+          
+          <a href="chapters/06_pipeline_leak.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Pipeline Acoustic Leak Detection</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 2: Aerospace, Defense & Automotive</span>
+            <span class="toc-badge">Projects 07–12</span>
+          </div>
+          
+          <a href="chapters/07_supersonic_airfoil.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Supersonic Airfoil Optimization</span>
+          </a>
+          
+          <a href="chapters/08_orbital_debris.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Orbital Debris Collision Avoidance</span>
+          </a>
+          
+          <a href="chapters/09_lidar_radar_fusion.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Autonomous LiDAR-Radar Fusion</span>
+          </a>
+          
+          <a href="chapters/10_turbine_vibration.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Jet Engine Vibration Anomaly</span>
+          </a>
+          
+          <a href="chapters/11_ballistic_monte_carlo.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Ballistic Wind-Drift Trajectory</span>
+          </a>
+          
+          <a href="chapters/12_crash_mesh_deform.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Crash-Test Mesh Deformation</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 3: Semiconductors, Manufacturing & Materials</span>
+            <span class="toc-badge">Projects 13–18</span>
+          </div>
+          
+          <a href="chapters/13_crystal_dft_surrogate.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Crystal DFT Surrogate</span>
+          </a>
+          
+          <a href="chapters/14_wafer_defect_cv.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Wafer Photolithography Defect CV</span>
+          </a>
+          
+          <a href="chapters/15_microchip_thermal.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">3D Microchip Thermal Dissipation</span>
+          </a>
+          
+          <a href="chapters/16_superconductor_tc.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Superconductor Tc Discovery</span>
+          </a>
+          
+          <a href="chapters/17_melt_pool_instability.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Laser Melt-Pool Instability</span>
+          </a>
+          
+          <a href="chapters/18_cyclic_fatigue_life.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Cyclic Fatigue Crack Life</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 4: Earth Sciences, Climate & Infrastructure</span>
+            <span class="toc-badge">Projects 19–24</span>
+          </div>
+          
+          <a href="chapters/19_earthquake_triangulation.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Seismic Wave Triangulation</span>
+          </a>
+          
+          <a href="chapters/20_flood_inundation.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Urban Flood Inundation</span>
+          </a>
+          
+          <a href="chapters/21_ocean_microplastics.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Ocean Microplastic Tracking</span>
+          </a>
+          
+          <a href="chapters/22_building_seismic_damping.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Building Seismic Resonance</span>
+          </a>
+          
+          <a href="chapters/23_atmospheric_carbon.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Atmospheric Carbon Plume</span>
+          </a>
+          
+          <a href="chapters/24_glacier_mass_balance.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Glacier Creep & Mass Balance</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 5: Finance, Healthcare & Complex Systems</span>
+            <span class="toc-badge">Projects 25–30</span>
+          </div>
+          
+          <a href="chapters/25_market_volatility_ising.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Market Volatility Ising Models</span>
+          </a>
+          
+          <a href="chapters/26_aneurysm_blood_flow.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Cerebral Aneurysm Hemodynamics</span>
+          </a>
+          
+          <a href="chapters/27_accelerated_mri_cs.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Accelerated MRI Compressed Sensing</span>
+          </a>
+          
+          <a href="chapters/28_hft_queue_mechanics.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Order Book Queue Mechanics</span>
+          </a>
+          
+          <a href="chapters/29_corneal_wavefront.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Corneal Optical Wavefront</span>
+          </a>
+          
+          <a href="chapters/30_traffic_phase_lwr.html" class="toc-item">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Highway Traffic Phase Transitions</span>
+          </a>
+          
+        </div>
+        
+      </nav>
+
+      <div class="sidebar-footer">
+        <span>v1.0 &bull; 2026 Edition</span>
+        <button class="theme-toggle-btn" aria-label="Toggle dark/light mode">
+          <span class="theme-mode-text">☀️ Light</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-wrapper">
+      <article class="content-container" style="max-width: 980px;">
+        <!-- Hero Section -->
+        <div style="margin-top: 10px; margin-bottom: 36px; padding: 36px 32px; background: linear-gradient(135deg, rgba(30, 64, 175, 0.06), rgba(2, 132, 199, 0.08)); border-radius: 12px; border: 1px solid var(--border-color);">
+          <div class="chapter-meta-badge" style="background: rgba(30, 64, 175, 0.12);">
+            <span>📖 Interactive Technical Monograph</span>
+            <span>&bull;</span>
+            <span>30 Industrial Projects</span>
+            <span>&bull;</span>
+            <span>Zero-Dependency Static Engine</span>
+          </div>
+          <h1 style="font-size: 2.5rem; margin-bottom: 16px;">Data Science & Machine Learning for Physics</h1>
+          <p style="font-size: 1.15rem; color: var(--text-secondary); max-width: 820px; line-height: 1.6; margin-bottom: 24px;">
+            A rigorous, code-first curriculum bridging classical physical laws (Navier-Stokes, Maxwell, Poisson, Hamilton-Jacobi) with modern machine learning, Physics-Informed Neural Networks (PINNs), and high-throughput industrial analytics.
+          </p>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <a href="chapters/01_wind_wake.html" style="background: var(--brand-primary); color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 8px;">
+              <span>Start Reading Project 01</span>
+              <span>&rarr;</span>
+            </a>
+            <button class="trigger-search-btn" style="background: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-primary); padding: 10px 18px; border-radius: 6px; cursor: pointer; font-weight: 500; font-size: 0.95rem;">
+              🔍 Browse Search Index
+            </button>
+          </div>
+        </div>
+
+        <!-- Standardized 6-Part Anatomy Banner -->
+        <h2 style="border: none; margin-top: 20px;">The Standardized 6-Part Engineering Anatomy</h2>
+        <p>Every capstone in this book adheres to a disciplined engineering workflow:</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 24px 0 40px 0;">
+          <div style="padding: 18px; background: var(--bg-surface); border-radius: 8px; border: 1px solid var(--border-color);">
+            <div style="font-weight: 700; color: var(--brand-primary); margin-bottom: 6px;">1. The Physical Principle</div>
+            <div style="font-size: 0.88rem; color: var(--text-secondary);">Governing PDEs/ODEs rendered in KaTeX, boundary & initial values, and dimensionless numbers ($Re$, $Pe$, $CFL$).</div>
+          </div>
+          <div style="padding: 18px; background: var(--bg-surface); border-radius: 8px; border: 1px solid var(--border-color);">
+            <div style="font-weight: 700; color: var(--accent-emerald); margin-bottom: 6px;">2. Industrial Context & ROI</div>
+            <div style="font-size: 0.88rem; color: var(--text-secondary);">Real-world engineering bottlenecks, operational failure modes, and quantified financial impact.</div>
+          </div>
+          <div style="padding: 18px; background: var(--bg-surface); border-radius: 8px; border: 1px solid var(--border-color);">
+            <div style="font-weight: 700; color: var(--accent-cyan); margin-bottom: 6px;">3. Synthetic Physics Solver</div>
+            <div style="font-size: 0.88rem; color: var(--text-secondary);">Self-contained, deterministic Python code generating physical ground-truth without broken external URLs.</div>
+          </div>
+          <div style="padding: 18px; background: var(--bg-surface); border-radius: 8px; border: 1px solid var(--border-color);">
+            <div style="font-weight: 700; color: var(--brand-primary-light); margin-bottom: 6px;">4. Physics-ML Workflow</div>
+            <div style="font-size: 0.88rem; color: var(--text-secondary);">Feature engineering, baseline ML vs. PINN/physics-constrained surrogate, and conservation-law residual checks.</div>
+          </div>
+          <div style="padding: 18px; background: var(--bg-surface); border-radius: 8px; border: 1px solid var(--border-color);">
+            <div style="font-weight: 700; color: var(--accent-amber); margin-bottom: 6px;">5. Diagnostics & Visualization</div>
+            <div style="font-size: 0.88rem; color: var(--text-secondary);">Interactive Plotly visualizations and high-DPI publication figures inspecting field errors and residuals.</div>
+          </div>
+          <div style="padding: 18px; background: var(--bg-surface); border-radius: 8px; border: 1px solid var(--border-color);">
+            <div style="font-weight: 700; color: var(--accent-rose); margin-bottom: 6px;">6. Production Deployment Notes</div>
+            <div style="font-size: 0.88rem; color: var(--text-secondary);">Inference latency benchmarks, edge hardware budgets, and real-time physical safety guardrails.</div>
+          </div>
+        </div>
+
+        <!-- Foundations & Reference Guides -->
+        
+        <div style="margin-top: 20px; margin-bottom: 40px;">
+          <h2 style="display: flex; align-items: center; justify-content: space-between;">
+            <span>Foundational & Reference Guides</span>
+            <span style="font-size: 0.85rem; font-family: var(--font-mono); color: var(--accent-emerald);">6 Reference Modules</span>
+          </h2>
+          <p>Essential theoretical frameworks, mathematical cheatsheets, benchmarking data, and interactive simulation tools:</p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; margin-top: 14px;">
+            
+            <a href="chapters/foundations.html" style="text-decoration: none; padding: 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-surface); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--accent-emerald); font-weight: 700;">THEORY</span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">20 min read</span>
+              </div>
+              <div style="font-size: 0.98rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Foundations & Paradigms of Physics-Informed ML</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Buckingham Pi, Equivariance, PINNs, and Neural Operators (FNO & DeepONet)</div>
+            </a>
+            
+            <a href="chapters/notation.html" style="text-decoration: none; padding: 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-surface); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--accent-emerald); font-weight: 700;">REFERENCE</span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">15 min read</span>
+              </div>
+              <div style="font-size: 0.98rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Mathematical Notation & Dimensionless Numbers</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Vector Calculus Operators, Differential Invariants, and Master Dimensionless Ratios</div>
+            </a>
+            
+            <a href="chapters/benchmarks.html" style="text-decoration: none; padding: 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-surface); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--accent-emerald); font-weight: 700;">BENCHMARKS</span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">15 min read</span>
+              </div>
+              <div style="font-size: 0.98rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Industrial ROI, Latency & Speedup Benchmarking Matrix</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Empirical Comparison of 30 Projects: Classical CFD/FEA vs Physics-ML Surrogates</div>
+            </a>
+            
+            <a href="chapters/datasets.html" style="text-decoration: none; padding: 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-surface); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--accent-emerald); font-weight: 700;">DATA CATALOG</span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">15 min read</span>
+              </div>
+              <div style="font-size: 0.98rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Sensor Telemetry & Open Physical Benchmark Datasets</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Verified Catalog of NOAA, NREL, NASA, USGS, and fastMRI Telemetry Repositories</div>
+            </a>
+            
+            <a href="chapters/glossary.html" style="text-decoration: none; padding: 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-surface); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--accent-emerald); font-weight: 700;">GLOSSARY</span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">25 min read</span>
+              </div>
+              <div style="font-size: 0.98rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Cross-Disciplinary Physics-ML Glossary</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">120+ Definitive Terms Across Continuum Mechanics, Statistical Physics, and Deep Learning</div>
+            </a>
+            
+            <a href="chapters/playground.html" style="text-decoration: none; padding: 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-surface); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--accent-emerald); font-weight: 700;">INTERACTIVE LAB</span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">15 min read</span>
+              </div>
+              <div style="font-size: 0.98rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Interactive Physics-ML In-Browser Sandbox</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Real-Time 1D Viscous Burgers' Shock Formation & 2D Heat Diffusion Solver</div>
+            </a>
+            
+          </div>
+        </div>
+        
+
+        <!-- Curriculum Matrix Table -->
+        <h2>Full Curriculum Matrix (30 Capstones Across 5 Parts)</h2>
+        <p>Explore the complete collection of 30 projects organized by industrial sector:</p>
+
+        
+        <div style="margin-top: 32px;">
+          <h3 style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--border-color); padding-bottom: 8px;">
+            <span>Part 1: Energy & Power Systems</span>
+            <span style="font-size: 0.85rem; font-family: var(--font-mono); color: var(--brand-primary);">Projects 01–06</span>
+          </h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; margin-top: 14px;">
+            
+            <a href="chapters/01_wind_wake.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Intermediate</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Wind Turbine Wake Deficit Modeling & Micro-Siting</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Coupling Navier-Stokes Momentum Deficit with Physics-Constrained Gaussian Processes</div>
+            </a>
+            
+            <a href="chapters/02_smart_grid_load.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Advanced</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Smart-Grid Frequency Stability & Load Dynamics</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Physics-Constrained Time-Series Forecasting via Synchronous Generator Swing ODEs</div>
+            </a>
+            
+            <a href="chapters/03_battery_degradation.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Intermediate</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Lithium-Ion Battery Health & Degradation Trajectories</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Electrochemical Impedance Spectroscopy (EIS) Feature Extraction & Recurrent Neural Surrogates</div>
+            </a>
+            
+            <a href="chapters/04_nuclear_core_temp.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Advanced</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Nuclear Reactor Core Thermal Distribution</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">2D Steady-State Poisson Heat Conduction via Physics-Informed Neural Networks (PINNs)</div>
+            </a>
+            
+            <a href="chapters/05_solar_irradiance.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Intermediate</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Solar Photovoltaic Irradiance Forecasting</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Atmospheric Radiative Transfer & Optical Depth Attenuation Hybrid Models</div>
+            </a>
+            
+            <a href="chapters/06_pipeline_leak.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Advanced</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Hydrocarbon Pipeline Acoustic Leak Localization</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Water-Hammer Transient Wave PDEs & Inverse Acoustic Parameter Inversion</div>
+            </a>
+            
+          </div>
+        </div>
+        
+        <div style="margin-top: 32px;">
+          <h3 style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--border-color); padding-bottom: 8px;">
+            <span>Part 2: Aerospace, Defense & Automotive</span>
+            <span style="font-size: 0.85rem; font-family: var(--font-mono); color: var(--brand-primary);">Projects 07–12</span>
+          </h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; margin-top: 14px;">
+            
+            <a href="chapters/07_supersonic_airfoil.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Advanced</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Supersonic Airfoil Aerodynamic Optimization</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Euler Shock-Expansion Theory Coupled with Surrogate Deep Networks</div>
+            </a>
+            
+            <a href="chapters/08_orbital_debris.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Advanced</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Orbital Debris Collision Avoidance & Trajectory Forecasting</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Perturbed Two-Body Astrodynamics & Conjunction Assessment Models</div>
+            </a>
+            
+            <a href="chapters/09_lidar_radar_fusion.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Intermediate</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Autonomous Vehicle Perception & Rigid-Body State Estimation</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Extended Kalman Filtering & Rigid-Body Kinematic Invariants</div>
+            </a>
+            
+            <a href="chapters/10_turbine_vibration.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Intermediate</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Aviation Jet Engine Vibration Anomaly Detection</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Harmonic Fast Fourier Transform Spectral Decomposition & Autoencoders</div>
+            </a>
+            
+            <a href="chapters/11_ballistic_monte_carlo.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Advanced</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Atmospheric Ballistic Re-entry & Wind-Drift Monte Carlo</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Compressible Drag, Coriolis Force, and Probabilistic Trajectory Ensembles</div>
+            </a>
+            
+            <a href="chapters/12_crash_mesh_deform.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Advanced</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Automotive Crash-Test Mesh Plastic Deformation</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Continuum Plasticity Stress Tensors & Geometric Graph Neural Networks</div>
+            </a>
+            
+          </div>
+        </div>
+        
+        <div style="margin-top: 32px;">
+          <h3 style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--border-color); padding-bottom: 8px;">
+            <span>Part 3: Semiconductors, Manufacturing & Materials</span>
+            <span style="font-size: 0.85rem; font-family: var(--font-mono); color: var(--brand-primary);">Projects 13–18</span>
+          </h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; margin-top: 14px;">
+            
+            <a href="chapters/13_crystal_dft_surrogate.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Advanced</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Crystal Lattice Density Functional Theory (DFT) Surrogates</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Electronic Bandgap & Formation Energy Prediction via Invariant Features</div>
+            </a>
+            
+            <a href="chapters/14_wafer_defect_cv.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Intermediate</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Semiconductor Wafer Photolithography Defect Classification</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Fourier Optics Diffraction Pattern Recognition & Spatial Defect Signatures</div>
+            </a>
+            
+            <a href="chapters/15_microchip_thermal.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Advanced</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">3D Heterogeneous Microchip Thermal Dissipation</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Multilayer Anisotropic Heat Conduction PINN with Joule Heat Generation</div>
+            </a>
+            
+            <a href="chapters/16_superconductor_tc.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Advanced</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">High-Temperature Superconductor Critical Temperature Discovery</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">BCS Phonon Coupling & Supervised Physical Regression</div>
+            </a>
+            
+            <a href="chapters/17_melt_pool_instability.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Advanced</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Additive Manufacturing Laser Melt-Pool Thermal Dynamics</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Marangoni Convection, Stefan Phase Change, and Thermal Keyhole Prediction</div>
+            </a>
+            
+            <a href="chapters/18_cyclic_fatigue_life.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Intermediate</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Turbine Blade Mechanical Cyclic Fatigue Life Estimation</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Paris-Erdogan Law Integration with Stress-Life (S-N) PINN Formulations</div>
+            </a>
+            
+          </div>
+        </div>
+        
+        <div style="margin-top: 32px;">
+          <h3 style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--border-color); padding-bottom: 8px;">
+            <span>Part 4: Earth Sciences, Climate & Infrastructure</span>
+            <span style="font-size: 0.85rem; font-family: var(--font-mono); color: var(--brand-primary);">Projects 19–24</span>
+          </h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; margin-top: 14px;">
+            
+            <a href="chapters/19_earthquake_triangulation.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Advanced</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Seismic Wave Arrival-Time Inversion & Epicenter Triangulation</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">P-Wave and S-Wave Elastic Refraction Physics with Inversion Neural Networks</div>
+            </a>
+            
+            <a href="chapters/20_flood_inundation.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Advanced</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Urban Flood Inundation & Topographic Drainage</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">2D Shallow Water Saint-Venant Equations Surrogates for Real-Time Warning</div>
+            </a>
+            
+            <a href="chapters/21_ocean_microplastics.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Intermediate</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Oceanic Microplastic Lagrangian Particle Tracking</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Hamiltonian Chaotic Advection in Oceanic Gyres & Geostrophic Flow Fields</div>
+            </a>
+            
+            <a href="chapters/22_building_seismic_damping.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Advanced</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">High-Rise Building Seismic Resonance & Tuned Mass Damping</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Coupled Multi-Degree-of-Freedom Harmonic Oscillators & Active Control Models</div>
+            </a>
+            
+            <a href="chapters/23_atmospheric_carbon.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Intermediate</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Industrial Atmospheric Carbon Plume Dispersion</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Gaussian Plume Advection-Diffusion Equations & Sensor Array Inversion</div>
+            </a>
+            
+            <a href="chapters/24_glacier_mass_balance.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Advanced</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Glacier Mass-Balance & Ice-Sheet Creep Mechanics</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Glen's Non-Newtonian Flow Law & Satellite Altimetry Physics-ML</div>
+            </a>
+            
+          </div>
+        </div>
+        
+        <div style="margin-top: 32px;">
+          <h3 style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--border-color); padding-bottom: 8px;">
+            <span>Part 5: Finance, Healthcare & Complex Systems</span>
+            <span style="font-size: 0.85rem; font-family: var(--font-mono); color: var(--brand-primary);">Projects 25–30</span>
+          </h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; margin-top: 14px;">
+            
+            <a href="chapters/25_market_volatility_ising.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Advanced</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Financial Market Flash-Crash Dynamics via 2D Ising Spin Systems</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Statistical Mechanics of Phase Transitions, Ferromagnetic Coupling, and Liquidity Cascades</div>
+            </a>
+            
+            <a href="chapters/26_aneurysm_blood_flow.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Advanced</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Cerebral Aneurysm Hemodynamic Shear Stress Prediction</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Pulsatile Navier-Stokes & Womersley Velocity Profile Surrogates</div>
+            </a>
+            
+            <a href="chapters/27_accelerated_mri_cs.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Advanced</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Accelerated Magnetic Resonance Imaging (MRI) Reconstruction</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Fourier K-Space Subsampling & Compressed Sensing Deep Regularization</div>
+            </a>
+            
+            <a href="chapters/28_hft_queue_mechanics.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Advanced</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">High-Frequency Limit Order Book Queue Dynamics</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Fokker-Planck Diffusion PDEs & Microstructure Particle Surrogates</div>
+            </a>
+            
+            <a href="chapters/29_corneal_wavefront.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Intermediate</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Refractive Laser Eye Surgery Corneal Wavefront Reconstruction</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Zernike Polynomial Wavefront Aberration Expansion & Ray-Tracing Optics</div>
+            </a>
+            
+            <a href="chapters/30_traffic_phase_lwr.html" style="text-decoration: none; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); display: flex; flex-direction: column; transition: transform 0.15s, border-color 0.15s;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--brand-primary); font-weight: 700;">PROJECT </span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">Intermediate</span>
+              </div>
+              <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Highway Traffic Flow Phase Transitions & Shockwave Dynamics</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">Lighthill-Whitham-Richards (LWR) Hyperbolic Conservation PDEs</div>
+            </a>
+            
+          </div>
+        </div>
+        
+
+      </article>
+    </main>
+  </div>
+
+  <!-- Search Modal -->
+  <div class="search-modal-backdrop" id="search-modal-backdrop">
+    <div class="search-modal">
+      <div class="search-modal-header">
+        <span style="font-size: 1.1rem; color: var(--text-muted);">🔍</span>
+        <input type="text" class="search-modal-input" id="search-modal-input" placeholder="Search physics equations, models, or industries..." autocomplete="off">
+        <button style="background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--text-muted);" onclick="document.getElementById('search-modal-backdrop').classList.remove('open')">&times;</button>
+      </div>
+      <div class="search-modal-results" id="search-modal-results"></div>
+    </div>
+  </div>
+
+  <script src="assets/main.js"></script>
+  <script src="assets/search.js"></script>
+</body>
+</html>

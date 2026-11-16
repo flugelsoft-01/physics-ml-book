@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Physics-ML In-Browser Sandbox | Data Science & Machine Learning for Physics</title>
+
+  <!-- Favicon & App Icons -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../assets/site.webmanifest">
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- Primary SEO Meta Tags -->
+  <meta name="title" content="Interactive Physics-ML In-Browser Sandbox | Data Science & Machine Learning for Physics">
+  <meta name="description" content="Real-Time 1D Viscous Burgers' Shock Formation & 2D Heat Diffusion Solver - Capstone Project in Foundations & Reference covering governing physical equations, synthetic solvers, and PINN architectures.">
+  <meta name="keywords" content="Burgers Equation, Heat Equation, Interactive Canvas, Shock Formation, Lax-Friedrichs, Physics-Informed Neural Networks, PINN, Scientific Machine Learning, SciML, Differential Equations">
+  <meta name="author" content="Data Science & ML for Physics Authors">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://physics-ml-book.org/chapters/playground.html">
+
+  <!-- GEO & Regional Metadata -->
+  <meta name="geo.region" content="US-CA">
+  <meta name="geo.placename" content="San Francisco, California">
+  <meta name="geo.position" content="37.7749;-122.4194">
+  <meta name="ICBM" content="37.7749, -122.4194">
+  <meta name="DC.title" content="Interactive Physics-ML In-Browser Sandbox">
+  <meta name="DC.subject" content="Physics-Informed Machine Learning, Computational Engineering">
+  <meta name="DC.coverage" content="World">
+
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Data Science & Machine Learning for Physics: 30 Capstone Projects Across Industries">
+  <meta property="og:title" content="Interactive Physics-ML In-Browser Sandbox">
+  <meta property="og:description" content="Real-Time 1D Viscous Burgers' Shock Formation & 2D Heat Diffusion Solver">
+  <meta property="og:url" content="https://physics-ml-book.org/chapters/playground.html">
+  <meta property="og:image" content="https://physics-ml-book.org/assets/apple-touch-icon.png">
+  <meta property="og:image:alt" content="Physics-ML Icon">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="en_GB">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Interactive Physics-ML In-Browser Sandbox">
+  <meta name="twitter:description" content="Real-Time 1D Viscous Burgers' Shock Formation & 2D Heat Diffusion Solver">
+  <meta name="twitter:image" content="https://physics-ml-book.org/assets/apple-touch-icon.png">
+
+  <!-- JSON-LD Structured Data Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Interactive Physics-ML In-Browser Sandbox",
+    "description": "Real-Time 1D Viscous Burgers' Shock Formation & 2D Heat Diffusion Solver",
+    "articleSection": "Foundations & Reference",
+    "keywords": "Burgers Equation, Heat Equation, Interactive Canvas, Shock Formation, Lax-Friedrichs",
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "isPartOf": {
+      "@type": "Book",
+      "name": "Data Science & Machine Learning for Physics: 30 Capstone Projects Across Industries",
+      "url": "https://physics-ml-book.org"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Physics-ML Technical Monograph Publishing"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="../assets/style.css">
+  
+  <!-- KaTeX for ultra-fast LaTeX math rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ],
+      throwOnError: false
+    });"></script>
+
+  <!-- Plotly.js for interactive physics diagnostics -->
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+</head>
+<body data-basepath="../">
+
+  <!-- Mobile Top Navigation Bar -->
+  <div class="mobile-topbar">
+    <button class="mobile-menu-btn" aria-label="Toggle Navigation">☰</button>
+    <a href="../index.html" class="book-title-badge">
+      <span class="book-icon">⚛</span>
+      <span class="book-title-text">Physics-ML Book</span>
+    </a>
+    <button class="search-box-btn trigger-search-btn" style="width: auto; padding: 6px 10px;">🔍</button>
+  </div>
+
+  <div class="app-wrapper">
+    <!-- 1. Left Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="book-title-badge">
+          <div class="book-icon">⚛</div>
+          <div class="book-title-text">DS & ML for Physics<br><small style="font-weight: 400; color: var(--text-muted); font-size: 0.75rem;">30 Capstone Projects</small></div>
+        </a>
+        <button class="search-box-btn trigger-search-btn">
+          <span>🔍 Quick search...</span>
+          <span class="search-shortcut">/</span>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Foundations & Reference</span>
+            <span class="toc-badge">Guides</span>
+          </div>
+          
+          <a href="../chapters/foundations.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Paradigms of Physics-ML</span>
+          </a>
+          
+          <a href="../chapters/notation.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Notation & Dimensionless Numbers</span>
+          </a>
+          
+          <a href="../chapters/benchmarks.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Industrial ROI Benchmarks</span>
+          </a>
+          
+          <a href="../chapters/datasets.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Open Datasets Catalog</span>
+          </a>
+          
+          <a href="../chapters/glossary.html" class="toc-item ">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Physics-ML Glossary</span>
+          </a>
+          
+          <a href="../chapters/playground.html" class="toc-item active">
+            <span class="toc-badge" style="color: var(--accent-emerald);">✦</span>
+            <span style="flex:1;">Live Interactive Sandbox</span>
+          </a>
+          
+        </div>
+        
+
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 1: Energy & Power Systems</span>
+            <span class="toc-badge">Projects 01–06</span>
+          </div>
+          
+          <a href="../chapters/01_wind_wake.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Wind Turbine Wake Modeling</span>
+          </a>
+          
+          <a href="../chapters/02_smart_grid_load.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Smart-Grid Load Dynamics</span>
+          </a>
+          
+          <a href="../chapters/03_battery_degradation.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Battery EIS & Degradation</span>
+          </a>
+          
+          <a href="../chapters/04_nuclear_core_temp.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Nuclear Core Heat PINN</span>
+          </a>
+          
+          <a href="../chapters/05_solar_irradiance.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Solar Irradiance Forecasting</span>
+          </a>
+          
+          <a href="../chapters/06_pipeline_leak.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Pipeline Acoustic Leak Detection</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 2: Aerospace, Defense & Automotive</span>
+            <span class="toc-badge">Projects 07–12</span>
+          </div>
+          
+          <a href="../chapters/07_supersonic_airfoil.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Supersonic Airfoil Optimization</span>
+          </a>
+          
+          <a href="../chapters/08_orbital_debris.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Orbital Debris Collision Avoidance</span>
+          </a>
+          
+          <a href="../chapters/09_lidar_radar_fusion.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Autonomous LiDAR-Radar Fusion</span>
+          </a>
+          
+          <a href="../chapters/10_turbine_vibration.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Jet Engine Vibration Anomaly</span>
+          </a>
+          
+          <a href="../chapters/11_ballistic_monte_carlo.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Ballistic Wind-Drift Trajectory</span>
+          </a>
+          
+          <a href="../chapters/12_crash_mesh_deform.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Crash-Test Mesh Deformation</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 3: Semiconductors, Manufacturing & Materials</span>
+            <span class="toc-badge">Projects 13–18</span>
+          </div>
+          
+          <a href="../chapters/13_crystal_dft_surrogate.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Crystal DFT Surrogate</span>
+          </a>
+          
+          <a href="../chapters/14_wafer_defect_cv.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Wafer Photolithography Defect CV</span>
+          </a>
+          
+          <a href="../chapters/15_microchip_thermal.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">3D Microchip Thermal Dissipation</span>
+          </a>
+          
+          <a href="../chapters/16_superconductor_tc.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Superconductor Tc Discovery</span>
+          </a>
+          
+          <a href="../chapters/17_melt_pool_instability.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Laser Melt-Pool Instability</span>
+          </a>
+          
+          <a href="../chapters/18_cyclic_fatigue_life.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Cyclic Fatigue Crack Life</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 4: Earth Sciences, Climate & Infrastructure</span>
+            <span class="toc-badge">Projects 19–24</span>
+          </div>
+          
+          <a href="../chapters/19_earthquake_triangulation.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Seismic Wave Triangulation</span>
+          </a>
+          
+          <a href="../chapters/20_flood_inundation.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Urban Flood Inundation</span>
+          </a>
+          
+          <a href="../chapters/21_ocean_microplastics.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Ocean Microplastic Tracking</span>
+          </a>
+          
+          <a href="../chapters/22_building_seismic_damping.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Building Seismic Resonance</span>
+          </a>
+          
+          <a href="../chapters/23_atmospheric_carbon.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Atmospheric Carbon Plume</span>
+          </a>
+          
+          <a href="../chapters/24_glacier_mass_balance.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Glacier Creep & Mass Balance</span>
+          </a>
+          
+        </div>
+        
+        <div class="toc-group">
+          <div class="toc-group-title">
+            <span>Part 5: Finance, Healthcare & Complex Systems</span>
+            <span class="toc-badge">Projects 25–30</span>
+          </div>
+          
+          <a href="../chapters/25_market_volatility_ising.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Market Volatility Ising Models</span>
+          </a>
+          
+          <a href="../chapters/26_aneurysm_blood_flow.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Cerebral Aneurysm Hemodynamics</span>
+          </a>
+          
+          <a href="../chapters/27_accelerated_mri_cs.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Accelerated MRI Compressed Sensing</span>
+          </a>
+          
+          <a href="../chapters/28_hft_queue_mechanics.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Order Book Queue Mechanics</span>
+          </a>
+          
+          <a href="../chapters/29_corneal_wavefront.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Corneal Optical Wavefront</span>
+          </a>
+          
+          <a href="../chapters/30_traffic_phase_lwr.html" class="toc-item ">
+            <span class="toc-badge"></span>
+            <span style="flex:1;">Highway Traffic Phase Transitions</span>
+          </a>
+          
+        </div>
+        
+      </nav>
+
+      <div class="sidebar-footer">
+        <span>v1.0 &bull; 2026 Edition</span>
+        <button class="theme-toggle-btn" aria-label="Toggle dark/light mode">
+          <span class="theme-mode-text">☀️ Light</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- 2. Main Content Center Pane -->
+    <main class="main-wrapper">
+      <article class="content-container">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+          <a href="../index.html">Home</a>
+          <span>&rsaquo;</span>
+          <span>Foundations & Reference</span>
+          <span>&rsaquo;</span>
+          <span style="color: var(--text-primary); font-weight: 500;">
+            Live Interactive Sandbox
+          </span>
+        </div>
+
+        <!-- Chapter Header Badge -->
+        <div class="chapter-meta-badge">
+          <span>🏷️ Client-Side Interactive Simulation</span>
+          <span>&bull;</span>
+          <span>⚙️ Interactive</span>
+          <span>&bull;</span>
+          <span>⏱️ 15 min read</span>
+        </div>
+
+        <h1>Interactive Physics-ML In-Browser Sandbox</h1>
+        <div class="chapter-subtitle">Real-Time 1D Viscous Burgers' Shock Formation & 2D Heat Diffusion Solver</div>
+
+        <!-- Rendered Chapter Body -->
+        <div class="chapter-body">
+          <p>This interactive laboratory executes real-time numerical physics solvers and conservation-law residual checks entirely inside your client browser using high-performance Vanilla JavaScript and HTML5 Canvas.</p>
+<p>Adjust physical parameters with the sliders below to explore non-linear wave steepening, shockwave inception, and 2D thermal conduction relaxation in real time.</p>
+<hr />
+<h2 id="1-1d-non-linear-viscous-burgers-equation-explorer">1. 1D Non-Linear Viscous Burgers' Equation Explorer</h2>
+<p>The 1D viscous Burgers' equation is the foundational benchmark problem in fluid dynamics and Physics-Informed Neural Networks:</p>
+<div class="katex-display">$$\frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x} = \nu \frac{\partial^2 u}{\partial x^2}$$</div>
+<p>It couples non-linear advective shock formation ($u \frac{\partial u}{\partial x}$) with viscous dissipative diffusion ($\nu \frac{\partial^2 u}{\partial x^2}$).</p>
+<div class="figure-container" style="padding: 24px;">
+  <!-- Simulation Controls -->
+  <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 16px; background: var(--bg-surface); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color); align-items: center;">
+    <div>
+      <label style="font-size: 0.82rem; font-weight: 700; display: block; margin-bottom: 4px;">Kinematic Viscosity ($\nu$): <span id="val-viscosity" style="color:var(--brand-primary); font-family:var(--font-mono);">0.008</span></label>
+      <input type="range" id="slider-viscosity" min="0.001" max="0.05" step="0.001" value="0.008" style="width: 160px;">
+    </div>
+    <div>
+      <label style="font-size: 0.82rem; font-weight: 700; display: block; margin-bottom: 4px;">Initial Amplitude ($A$): <span id="val-amplitude" style="color:var(--brand-primary); font-family:var(--font-mono);">1.20</span></label>
+      <input type="range" id="slider-amplitude" min="0.2" max="2.0" step="0.1" value="1.2" style="width: 140px;">
+    </div>
+    <div style="display: flex; gap: 8px; margin-top: 18px;">
+      <button id="btn-toggle-burgers" style="background: var(--brand-primary); color: white; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem;">Pause</button>
+      <button id="btn-reset-burgers" style="background: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-primary); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.85rem;">Reset Wave</button>
+    </div>
+    <div style="margin-left: auto; text-align: right; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">
+      <div>Step: <span id="sim-step" style="color:var(--text-primary); font-weight:600;">0</span></div>
+      <div>Max Gradient $|u_x|$: <span id="sim-grad" style="color:var(--brand-primary); font-weight:600;">0.00</span></div>
+    </div>
+  </div>
+
+  <!-- Canvas -->
+  <div style="background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; overflow: hidden; position: relative;">
+    <canvas id="canvas-burgers" width="800" height="340" style="width: 100%; height: 340px; display: block;"></canvas>
+  </div>
+  <div class="figure-caption" style="margin-top: 10px;">
+    <strong>Live Canvas Simulation:</strong> 1D non-linear wave profile $u(x, t)$ advancing under Lax-Friedrichs finite-difference advection-diffusion. Notice how lowering viscosity $\nu$ causes steepening into a localized shockwave front.
+  </div>
+</div>
+
+<hr />
+<h2 id="2-2d-steady-state-poisson-heat-relaxation-sandbox">2. 2D Steady-State Poisson Heat Relaxation Sandbox</h2>
+<p>Click or drag on the canvas below to place localized fission or microchip heat sources ($Q > 0$). The simulator runs real-time successive relaxation of the 2D heat equation $-\alpha \nabla^2 T = Q(x, y)$, measuring the global PDE residual norm $\| \alpha \nabla^2 T + Q \|_2$.</p>
+<div class="figure-container" style="padding: 24px;">
+  <div style="display: flex; gap: 16px; margin-bottom: 14px; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+    <div style="font-size: 0.88rem; color: var(--text-secondary);">
+      <strong>Interactive Instructions:</strong> Click or drag inside the grid to deposit thermal energy.
+    </div>
+    <div style="display: flex; gap: 8px;">
+      <button id="btn-clear-heat" style="background: var(--bg-surface); border: 1px solid var(--border-color); padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 0.82rem;">Clear Heat Sources</button>
+      <div style="padding: 4px 10px; background: rgba(5, 150, 105, 0.1); border: 1px solid var(--accent-emerald); border-radius: 6px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-emerald);">
+        PDE Residual: <span id="heat-res-val">0.00e+0</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="background: #000; border: 1px solid var(--border-color); border-radius: 6px; overflow: hidden;">
+    <canvas id="canvas-heat" width="500" height="280" style="width: 100%; height: 280px; display: block; cursor: crosshair;"></canvas>
+  </div>
+  <div class="figure-caption" style="margin-top: 10px;">
+    <strong>Live 2D Heat Diffusion:</strong> In-browser SOR iterative solver computing continuous conduction toward 300K boundary conditions.
+  </div>
+</div>
+
+<!-- Embedded Numerical Simulation Scripts -->
+<script>
+(function() {
+  // ==========================================
+  // 1. Burgers' Equation Simulation Engine
+  // ==========================================
+  const canvasB = document.getElementById('canvas-burgers');
+  if (canvasB) {
+    const ctxB = canvasB.getContext('2d');
+    const nx = 200;
+    const dx = 2.0 * Math.PI / nx;
+    let dt = 0.008;
+    let nu = 0.008;
+    let amp = 1.2;
+    let stepCount = 0;
+    let isRunning = true;
+
+    let u = new Float32Array(nx);
+    let uNext = new Float32Array(nx);
+
+    function initWave() {
+      stepCount = 0;
+      for (let i = 0; i < nx; i++) {
+        const x = i * dx;
+        u[i] = amp * Math.sin(x);
+      }
+    }
+    initWave();
+
+    function stepBurgers() {
+      for (let i = 0; i < nx; i++) {
+        const im1 = (i - 1 + nx) % nx;
+        const ip1 = (i + 1) % nx;
+        // Central flux advection + diffusion
+        const adv = -u[i] * (u[ip1] - u[im1]) / (2.0 * dx);
+        const diff = nu * (u[ip1] - 2.0 * u[i] + u[im1]) / (dx * dx);
+        uNext[i] = u[i] + dt * (adv + diff);
+      }
+      u.set(uNext);
+      stepCount++;
+    }
+
+    function renderBurgers() {
+      ctxB.clearRect(0, 0, canvasB.width, canvasB.height);
+      const w = canvasB.width;
+      const h = canvasB.height;
+      const midY = h / 2;
+      const scaleY = 70.0;
+
+      // Draw zero axis
+      ctxB.strokeStyle = '#334155';
+      ctxB.lineWidth = 1;
+      ctxB.setLineDash([4, 4]);
+      ctxB.beginPath();
+      ctxB.moveTo(0, midY);
+      ctxB.lineTo(w, midY);
+      ctxB.stroke();
+      ctxB.setLineDash([]);
+
+      // Draw Wave Curve
+      ctxB.strokeStyle = '#3b82f6';
+      ctxB.lineWidth = 3;
+      ctxB.beginPath();
+      let maxGrad = 0;
+
+      for (let i = 0; i < nx; i++) {
+        const xPix = (i / (nx - 1)) * w;
+        const yPix = midY - u[i] * scaleY;
+        if (i === 0) ctxB.moveTo(xPix, yPix);
+        else ctxB.lineTo(xPix, yPix);
+
+        const im1 = (i - 1 + nx) % nx;
+        const grad = Math.abs(u[i] - u[im1]) / dx;
+        if (grad > maxGrad) maxGrad = grad;
+      }
+      ctxB.stroke();
+
+      // Update telemetry indicators
+      document.getElementById('sim-step').textContent = stepCount;
+      document.getElementById('sim-grad').textContent = maxGrad.toFixed(2);
+
+      if (isRunning) {
+        stepBurgers();
+      }
+      requestAnimationFrame(renderBurgers);
+    }
+    requestAnimationFrame(renderBurgers);
+
+    // Controls
+    document.getElementById('slider-viscosity').addEventListener('input', (e) => {
+      nu = parseFloat(e.target.value);
+      document.getElementById('val-viscosity').textContent = nu.toFixed(3);
+    });
+    document.getElementById('slider-amplitude').addEventListener('input', (e) => {
+      amp = parseFloat(e.target.value);
+      document.getElementById('val-amplitude').textContent = amp.toFixed(2);
+      initWave();
+    });
+    document.getElementById('btn-toggle-burgers').addEventListener('click', (e) => {
+      isRunning = !isRunning;
+      e.target.textContent = isRunning ? 'Pause' : 'Resume';
+    });
+    document.getElementById('btn-reset-burgers').addEventListener('click', () => {
+      initWave();
+    });
+  }
+
+  // ==========================================
+  // 2. 2D Heat Equation Relaxation Engine
+  // ==========================================
+  const canvasH = document.getElementById('canvas-heat');
+  if (canvasH) {
+    const ctxH = canvasH.getContext('2d');
+    const cols = 50;
+    const rows = 28;
+    let T = new Float32Array(cols * rows);
+    let Q = new Float32Array(cols * rows);
+    T.fill(300.0);
+
+    let isDrawing = false;
+    function addHeat(e) {
+      const rect = canvasH.getBoundingClientRect();
+      const x = Math.floor(((e.clientX - rect.left) / rect.width) * cols);
+      const y = Math.floor(((e.clientY - rect.top) / rect.height) * rows);
+      if (x > 1 && x < cols - 2 && y > 1 && y < rows - 2) {
+        for (let dy = -1; dy <= 1; dy++) {
+          for (let dx = -1; dx <= 1; dx++) {
+            const idx = (y + dy) * cols + (x + dx);
+            Q[idx] += 40.0;
+            T[idx] += 30.0;
+          }
+        }
+      }
+    }
+
+    canvasH.addEventListener('mousedown', (e) => { isDrawing = true; addHeat(e); });
+    window.addEventListener('mouseup', () => { isDrawing = false; });
+    canvasH.addEventListener('mousemove', (e) => { if (isDrawing) addHeat(e); });
+    document.getElementById('btn-clear-heat').addEventListener('click', () => {
+      Q.fill(0);
+      T.fill(300.0);
+    });
+
+    function stepHeat() {
+      let residualSum = 0;
+      let count = 0;
+      for (let y = 1; y < rows - 1; y++) {
+        for (let x = 1; x < cols - 1; x++) {
+          const idx = y * cols + x;
+          const up = (y - 1) * cols + x;
+          const down = (y + 1) * cols + x;
+          const left = y * cols + (x - 1);
+          const right = y * cols + (x + 1);
+
+          const tNew = 0.25 * (T[up] + T[down] + T[left] + T[right] + 0.1 * Q[idx]);
+          const diff = tNew - T[idx];
+          T[idx] += 0.8 * diff;
+          residualSum += diff * diff;
+          count++;
+        }
+      }
+      const resVal = Math.sqrt(residualSum / count);
+      document.getElementById('heat-res-val').textContent = resVal.toExponential(2);
+    }
+
+    function renderHeat() {
+      stepHeat();
+      const imgData = ctxH.createImageData(cols, rows);
+      for (let i = 0; i < T.length; i++) {
+        const val = Math.min(1.0, Math.max(0.0, (T[i] - 300.0) / 120.0));
+        const idx = i * 4;
+        // Thermal colormap (black -> red -> orange -> yellow -> white)
+        imgData.data[idx] = Math.floor(Math.min(255, val * 380));
+        imgData.data[idx + 1] = Math.floor(Math.max(0, (val - 0.4) * 400));
+        imgData.data[idx + 2] = Math.floor(Math.max(0, (val - 0.75) * 600));
+        imgData.data[idx + 3] = 255;
+      }
+
+      // Draw scaled up to canvas
+      createImageBitmap(imgData).then(bmp => {
+        ctxH.drawImage(bmp, 0, 0, canvasH.width, canvasH.height);
+      });
+      requestAnimationFrame(renderHeat);
+    }
+    requestAnimationFrame(renderHeat);
+  }
+})();
+</script>
+        </div>
+
+        <!-- Bottom Chapter Pagination -->
+        <div class="chapter-nav-cards">
+          
+          <a href="../chapters/glossary.html" class="chapter-nav-card prev">
+            <span class="chapter-nav-label">&larr; Previous Capstone</span>
+            <span class="chapter-nav-title">: Physics-ML Glossary</span>
+          </a>
+          
+
+          
+        </div>
+      </article>
+
+      <!-- 3. Right Sidebar ("On This Page" Section Anchor Tracker) -->
+      <aside class="right-toc">
+        <div class="right-toc-title">On This Page</div>
+        <ul class="right-toc-links">
+          <li><a href="#1-the-physical-principle" class="right-toc-link">1. Physical Principle</a></li>
+          <li><a href="#2-industrial-context-roi" class="right-toc-link">2. Industrial ROI</a></li>
+          <li><a href="#3-data-acquisition-synthetic-physics-solver" class="right-toc-link">3. Synthetic Solver</a></li>
+          <li><a href="#4-data-science-physics-ml-workflow" class="right-toc-link">4. Physics-ML Workflow</a></li>
+          <li><a href="#5-interactive-visualization-diagnostics" class="right-toc-link">5. Diagnostics & Viz</a></li>
+          <li><a href="#6-production-deployment-notes" class="right-toc-link">6. Deployment Notes</a></li>
+        </ul>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Search Modal Backdrop & Dialog -->
+  <div class="search-modal-backdrop" id="search-modal-backdrop">
+    <div class="search-modal">
+      <div class="search-modal-header">
+        <span style="font-size: 1.1rem; color: var(--text-muted);">🔍</span>
+        <input type="text" class="search-modal-input" id="search-modal-input" placeholder="Search physics equations, models, or industries..." autocomplete="off">
+        <button style="background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--text-muted);" onclick="document.getElementById('search-modal-backdrop').classList.remove('open')">&times;</button>
+      </div>
+      <div class="search-modal-results" id="search-modal-results"></div>
+    </div>
+  </div>
+
+  <script src="../assets/main.js"></script>
+  <script src="../assets/search.js"></script>
+</body>
+</html>
