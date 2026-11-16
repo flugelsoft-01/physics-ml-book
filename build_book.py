@@ -568,10 +568,16 @@ def build():
     if generate_flagship_figures:
         generate_flagship_figures.run()
 
-    # Copy static assets (css, js)
+    # Copy static assets (css, js, icons)
     for asset_file in assets_dir.glob("*"):
         if asset_file.is_file():
             shutil.copy2(asset_file, dist_dir / "assets" / asset_file.name)
+
+    # Cloudflare Pages specific deployment files (_headers, _redirects)
+    for cf_file in ["_headers", "_redirects"]:
+        src_cf = assets_dir / cf_file
+        if src_cf.exists():
+            shutil.copy2(src_cf, dist_dir / cf_file)
 
     # Jinja2 environment
     env = Environment(loader=FileSystemLoader(str(templates_dir)))

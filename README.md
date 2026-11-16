@@ -108,5 +108,30 @@ Open [http://localhost:8000](http://localhost:8000) in your web browser.
 
 ---
 
+## ⚡ Cloudflare Pages Deployment
+
+This repository is pre-configured for instant zero-configuration deployment to **Cloudflare Pages**:
+
+### Option A: Cloudflare Pages Git Integration (Recommended)
+1. Go to **Cloudflare Dashboard** > **Workers & Pages** > **Create application** > **Pages** > **Connect to Git**.
+2. Select `flugelsoft-01/physics-ml-book`.
+3. Configure build settings:
+   - **Framework preset:** `None`
+   - **Build command:** `pip install -r requirements.txt && python3 build_book.py`
+   - **Build output directory:** `dist`
+   - **Environment variables:** `PYTHON_VERSION = 3.11`
+4. Click **Save and Deploy**. Cloudflare automatically respects `dist/_headers` (security & caching policies) and `dist/_redirects`.
+
+### Option B: Cloudflare Wrangler CLI
+```bash
+# Build the static distribution
+python3 build_book.py
+
+# Deploy with Wrangler CLI
+npx wrangler pages deploy dist --project-name=physics-ml-book
+```
+
+---
+
 ## 📄 License
 This project is licensed under the MIT License.
