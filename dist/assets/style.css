@@ -1273,3 +1273,336 @@ code {
   line-height: 1.6;
 }
 
+
+
+/* =====================================
+   Sidebar Reading Progress Tracker
+   ===================================== */
+.sidebar-progress-container {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: var(--bg-surface);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.sidebar-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.sidebar-progress-bar-bg {
+  width: 100%;
+  height: 6px;
+  background: var(--border-color);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.sidebar-progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--brand-primary), var(--accent-emerald));
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+.toc-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-emerald);
+  font-weight: 800;
+  font-size: 0.85rem;
+  margin-left: 6px;
+}
+
+/* =====================================
+   Chapter Top Action Toolbar
+   ===================================== */
+.chapter-action-bar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 18px 0 28px 0;
+  padding: 12px 16px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.action-btn:hover {
+  background: var(--border-color);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.action-colab {
+  padding: 4px 8px;
+  background: transparent;
+  border-color: transparent;
+}
+
+.action-colab:hover {
+  background: transparent;
+  transform: translateY(-1px);
+}
+
+.colab-badge-img {
+  height: 24px;
+  vertical-align: middle;
+}
+
+.action-pyodide-trigger {
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.08), rgba(5, 150, 105, 0.1));
+  border-color: rgba(5, 150, 105, 0.3);
+  color: var(--accent-emerald);
+}
+
+.action-pyodide-trigger:hover {
+  background: rgba(5, 150, 105, 0.18);
+  border-color: var(--accent-emerald);
+  color: var(--accent-emerald);
+}
+
+.action-complete-toggle.completed {
+  background: rgba(5, 150, 105, 0.1);
+  border-color: var(--accent-emerald);
+  color: var(--accent-emerald);
+}
+
+.action-complete-toggle.completed .complete-checkbox-icon {
+  content: "☑";
+  color: var(--accent-emerald);
+}
+
+/* =====================================
+   In-Browser Pyodide Execution Workbench
+   ===================================== */
+.pyodide-workbench-panel {
+  display: none;
+  margin: 20px 0 32px 0;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--bg-secondary);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.pyodide-workbench-panel.open {
+  display: block;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.pyodide-workbench-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.pyodide-workbench-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  flex-wrap: wrap;
+}
+
+.pyodide-status-badge {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(2, 132, 199, 0.1);
+  color: var(--accent-cyan);
+}
+
+.pyodide-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+.pyodide-close-btn:hover {
+  color: var(--text-primary);
+}
+
+.pyodide-editor-container {
+  padding: 14px 18px;
+  background: var(--code-bg);
+}
+
+.pyodide-code-editor {
+  width: 100%;
+  height: 220px;
+  background: transparent;
+  color: var(--code-text);
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  border: none;
+  outline: none;
+  resize: vertical;
+}
+
+.pyodide-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.btn-pyodide-run {
+  background: linear-gradient(135deg, var(--accent-emerald), #047857);
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.btn-pyodide-run:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.btn-pyodide-run:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.btn-pyodide-reset {
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  padding: 7px 14px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.84rem;
+  cursor: pointer;
+}
+
+.btn-pyodide-reset:hover {
+  background: var(--border-color);
+  color: var(--text-primary);
+}
+
+.pyodide-outputs {
+  padding: 14px 18px;
+}
+
+.pyodide-output-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.pyodide-terminal-output {
+  background: #050811;
+  color: #38bdf8;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  padding: 12px 14px;
+  border-radius: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+.terminal-placeholder {
+  color: #64748b;
+  font-style: italic;
+}
+
+.terminal-line {
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+.terminal-line.error {
+  color: #f87171;
+}
+
+.pyodide-plot-output {
+  margin-top: 14px;
+  text-align: center;
+  background: var(--bg-primary);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.pyodide-plot-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Download script button on code blocks */
+.download-py-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-right: 8px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.download-py-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.1);
+}

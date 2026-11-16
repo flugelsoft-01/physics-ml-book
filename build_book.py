@@ -579,6 +579,19 @@ def build():
         if src_cf.exists():
             shutil.copy2(src_cf, dist_dir / cf_file)
 
+    # Copy shared_utils for Pyodide in-browser runtime
+    dist_su = dist_dir / "shared_utils"
+    dist_su.mkdir(parents=True, exist_ok=True)
+    for su_file in (root_dir / "shared_utils").glob("*.py"):
+        shutil.copy2(su_file, dist_su / su_file.name)
+
+    # Generate 30 Jupyter Notebooks (.ipynb)
+    try:
+        from generate_notebooks import generate_all_notebooks
+        generate_all_notebooks()
+    except Exception as e:
+        print(f"Warning: Could not generate notebooks: {e}")
+
     # Jinja2 environment
     env = Environment(loader=FileSystemLoader(str(templates_dir)))
     book_template = env.get_template("book_layout.html")
@@ -649,6 +662,9 @@ def build():
 
         ch_ctx = dict(ch)
         ch_ctx["content_html"] = content_html
+        ch_ctx["is_capstone"] = True
+        ch_ctx["colab_url"] = f"https://colab.research.google.com/github/flugelsoft-01/physics-ml-book/blob/main/notebooks/{slug}.ipynb"
+        ch_ctx["notebook_url"] = f"../notebooks/{slug}.ipynb"
 
         rendered_html = book_template.render(
             curriculum=CURRICULUM,
@@ -698,6 +714,9 @@ def build():
         sp_ctx["content_html"] = content_html
         sp_ctx["part_name"] = "Foundations & Reference"
         sp_ctx["number_str"] = sp["badge"]
+        sp_ctx["is_capstone"] = False
+        sp_ctx["colab_url"] = None
+        sp_ctx["notebook_url"] = None
 
         prev_p = SUPPLEMENTARY_PAGES[j - 1] if j > 0 else None
         next_p = SUPPLEMENTARY_PAGES[j + 1] if j < len(SUPPLEMENTARY_PAGES) - 1 else None
