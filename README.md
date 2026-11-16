@@ -7,6 +7,11 @@
 
 A complete, self-contained, browsable static HTML monograph bridging classical physical laws (Navier-Stokes, Maxwell, Poisson, Saint-Venant, LWR) with modern Physics-Informed Machine Learning (PINNs), Fourier Neural Operators (FNO), and real-time industrial telemetry.
 
+**Author:** [Kalyanjit Hatibaruah](https://github.com/flugelsoft-01)  
+**Edition:** 2026 Comprehensive Edition  
+**Repository:** [github.com/flugelsoft-01/physics-ml-book](https://github.com/flugelsoft-01/physics-ml-book)  
+**Live Site:** [flugelsoft-01.github.io/physics-ml-book](https://flugelsoft-01.github.io/physics-ml-book/)
+
 ---
 
 ## 📖 Book Architecture & Overview

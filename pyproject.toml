@@ -3,7 +3,7 @@ name = "book-physics-ml"
 version = "1.0.0"
 description = "Data Science & Machine Learning for Physics: 30 Capstone Projects Across Industries"
 authors = [
-    { name = "Physics-ML Author & Engineer" }
+    { name = "Kalyanjit Hatibaruah" }
 ]
 readme = "README.md"
 requires-python = ">=3.10"
